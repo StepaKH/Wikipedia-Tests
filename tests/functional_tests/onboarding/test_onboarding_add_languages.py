@@ -1,39 +1,21 @@
-import unittest
-import time
-from drivers.appium_driver import create_driver
-from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
+def test_add_or_edit_languages(onboarding):
+    """Тест кнопки 'Add or edit languages' и навигации обратно"""
 
-class OnboardingScreenTests(unittest.TestCase):
+    # Проверка кнопки 'Add or edit languages' на главном экране
+    assert onboarding.is_add_language_button_visible(), "Кнопка 'Add or edit languages' не отображается"
+    onboarding.tap_add_language_button()
 
-    def setUp(self):
-        self.driver = create_driver()
-        self.onboarding = OnboardingPage(self.driver)
+    # Нажимаем кнопку "Add language" в списке
+    assert onboarding.is_add_language_in_list_visible(), "Кнопка 'Add language' не отображается"
+    onboarding.tap_add_language_in_list()
 
-    def tearDown(self):
-        if self.driver:
-            self.driver.quit()
+    # Появляется кнопка "Navigate up" — возвращаемся на экран выбора языка
+    assert onboarding.is_navigate_up_visible(), "Кнопка 'Navigate up' не отображается (1-й раз)"
+    onboarding.tap_navigate_up()
 
-    def test_add_or_edit_languages(self):
-        """Тестирование кнопки 'Add or edit languages' и навигации"""
+    # Возвращаемся на экран онбординга снова через "Navigate up"
+    assert onboarding.is_navigate_up_visible(), "Кнопка 'Navigate up' не отображается (2-й раз)"
+    onboarding.tap_navigate_up()
 
-        self.assertTrue(self.onboarding.is_add_language_button_visible(), "Кнопка 'Add or edit languages' не отображается")
-        self.onboarding.tap_add_language_button()
-
-        # Нажимаем на кнопку "Add language"
-        self.assertTrue(self.onboarding.is_add_language_in_list_visible(), "Кнопка 'Add language' не отображается")
-        self.onboarding.tap_add_language_in_list()
-        time.sleep(2)
-
-        # Возвращаемся на экран выбора языка с помощью кнопки "Navigate up"
-        self.assertTrue(self.onboarding.is_navigate_up_visible(), "Кнопка 'Navigate up' не отображается")
-        self.onboarding.tap_navigate_up()
-
-        # Возвращаемся на первый экран онбординга с помощью кнопки "Navigate up"
-        self.assertTrue(self.onboarding.is_navigate_up_visible(), "Кнопка 'Navigate up' не отображается")
-        self.onboarding.tap_navigate_up()
-
-        # Проверяем, что вернулись на первый экран онбординга (проверка наличия кнопки Continue)
-        self.assertTrue(self.onboarding.is_continue_button_visible())
-
-if __name__ == "__main__":
-    unittest.main()
+    # Проверка, что вернулись на экран с кнопкой "Continue"
+    assert onboarding.is_continue_button_visible(), "Кнопка 'Continue' не отображается — возможно, не вернулись на экран онбординга"

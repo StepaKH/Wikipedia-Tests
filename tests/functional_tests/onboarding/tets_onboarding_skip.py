@@ -1,55 +1,14 @@
-import unittest
-import time
-from drivers.appium_driver import create_driver
-from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
+import pytest
 
-class OnboardingScreenTests(unittest.TestCase):
+@pytest.mark.parametrize("screen_count", [0, 1, 2])
+def test_skip_button_on_screens(onboarding, screen_count):
+    """Проверка кнопки 'Skip' на 1, 2 и 3 экранах онбординга"""
 
-    def setUp(self):
-        self.driver = create_driver()
-        self.onboarding = OnboardingPage(self.driver)
+    for _ in range(screen_count):
+        assert onboarding.is_continue_button_visible(), "Кнопка 'Continue' не отображается"
+        onboarding.tap_continue()
 
-    def tearDown(self):
-        if self.driver:
-            self.driver.quit()
+    assert onboarding.is_skip_button_visible(), f"Кнопка 'Skip' не отображается на экране {screen_count + 1}"
+    onboarding.tap_skip()
 
-    def test_skip_on_first_screen(self):
-        """Тест кнопки 'Skip' на первом экране"""
-        self.assertTrue(self.onboarding.is_skip_button_visible())
-        self.onboarding.tap_skip()
-        time.sleep(2)
-
-        # Проверяем, что открылся главный экран
-        self.assertTrue(self.onboarding.is_main_screen_visible())
-
-    def test_skip_on_second_screen(self):
-        """Тест кнопки 'Skip' на втором экране"""
-        # Переход на второй экран
-        self.onboarding.tap_continue()
-        time.sleep(1)
-
-        # Проверяем кнопку Skip
-        self.assertTrue(self.onboarding.is_skip_button_visible())
-        self.onboarding.tap_skip()
-        time.sleep(2)
-
-        # Проверяем, что открылся главный экран
-        self.assertTrue(self.onboarding.is_main_screen_visible())
-
-    def test_skip_on_third_screen(self):
-        """Тест кнопки 'Skip' на третьем экране"""
-        # Переход на третий экран
-        for _ in range(2):
-            self.onboarding.tap_continue()
-            time.sleep(1)
-
-        # Проверяем кнопку Skip
-        self.assertTrue(self.onboarding.is_skip_button_visible())
-        self.onboarding.tap_skip()
-        time.sleep(2)
-
-        # Проверяем, что открылся главный экран
-        self.assertTrue(self.onboarding.is_main_screen_visible())
-
-if __name__ == "__main__":
-    unittest.main()
+    assert onboarding.is_main_screen_visible(), "Главный экран не отображается после нажатия 'Skip'"
