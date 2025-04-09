@@ -5,7 +5,7 @@ class Config:
     APPIUM_SERVER_URL = "http://localhost:4723"
 
     # Путь к APK-файлу
-    APP_PATH = "/Users/user/StudioProjects/apps-android-wikipedia/app/build/outputs/apk/alpha/debug/app-alpha-debug.apk"
+    APP_PATH = ""
 
     # Настройки Appium
     PLATFORM_NAME = "Android"

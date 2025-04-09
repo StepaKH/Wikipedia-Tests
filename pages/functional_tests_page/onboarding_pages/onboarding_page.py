@@ -12,7 +12,6 @@ class OnboardingPage:
     _GET_STARTED_BTN_ID = "org.wikipedia.alpha:id/fragment_onboarding_done_button"
     _SKIP_BIN_ID = "org.wikipedia.alpha:id/fragment_onboarding_skip_button"
     _ADD_LANGUAGE_BTN_ID = "org.wikipedia.alpha:id/addLanguageButton"
-    _LANGUAGE_SCREEN_TITLE_ID = "org.wikipedia.alpha:id/toolbar"
     _MAIN_SCREEN_XPATH = "//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.LinearLayout"
     _ADD_LANGUAGE_XPATH = "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/wiki_language_title' and @text='Add language']"
     _NAVIGATE_UP_XPATH = "//android.widget.ImageButton[@content-desc='Navigate up']"
@@ -54,9 +53,6 @@ class OnboardingPage:
 
     def is_add_language_button_visible(self):
         return self.driver.find_element(AppiumBy.ID, self._ADD_LANGUAGE_BTN_ID).is_displayed()
-
-    def is_language_screen_visible(self):
-        return self.driver.find_element(AppiumBy.ID, self._LANGUAGE_SCREEN_TITLE_ID).is_displayed()
 
     def is_add_language_in_list_visible(self):
         return self.driver.find_element(AppiumBy.XPATH, self._ADD_LANGUAGE_XPATH).is_displayed()
