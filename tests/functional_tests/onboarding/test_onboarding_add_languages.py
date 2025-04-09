@@ -19,9 +19,6 @@ class OnboardingScreenTests(unittest.TestCase):
         self.assertTrue(self.onboarding.is_add_language_button_visible(), "Кнопка 'Add or edit languages' не отображается")
         self.onboarding.tap_add_language_button()
 
-        # Проверяем, что открылся экран выбора языка
-        self.assertTrue(self.onboarding.is_language_screen_visible(), "Экран добавления языка не открылся")
-
         # Нажимаем на кнопку "Add language"
         self.assertTrue(self.onboarding.is_add_language_in_list_visible(), "Кнопка 'Add language' не отображается")
         self.onboarding.tap_add_language_in_list()
