@@ -1,61 +1,58 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.functional_tests_page.base_page import BasePage
 
-class OnboardingPage:
+class OnboardingPage(BasePage):
     def __init__(self, driver):
-        self.wait = WebDriverWait(driver, 10)
-        self.driver = driver
+        super().__init__(driver)
 
     # Protected Locators
-    _CONTINUE_BTN_ID = "org.wikipedia.alpha:id/fragment_onboarding_forward_button"
-    _GET_STARTED_BTN_ID = "org.wikipedia.alpha:id/fragment_onboarding_done_button"
-    _SKIP_BIN_ID = "org.wikipedia.alpha:id/fragment_onboarding_skip_button"
-    _ADD_LANGUAGE_BTN_ID = "org.wikipedia.alpha:id/addLanguageButton"
-    _MAIN_SCREEN_XPATH = "//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.LinearLayout"
-    _ADD_LANGUAGE_XPATH = "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/wiki_language_title' and @text='Add language']"
-    _NAVIGATE_UP_XPATH = "//android.widget.ImageButton[@content-desc='Navigate up']"
+    _CONTINUE_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/fragment_onboarding_forward_button")
+    _GET_STARTED_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/fragment_onboarding_done_button")
+    _SKIP_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/fragment_onboarding_skip_button")
+    _ADD_LANGUAGE_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/addLanguageButton")
+    _MAIN_SCREEN = (
+    AppiumBy.XPATH, "//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.LinearLayout")
+    _ADD_LANGUAGE_ITEM = (AppiumBy.XPATH,
+                          "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/wiki_language_title' and @text='Add language']")
+    _NAVIGATE_UP_BTN = (AppiumBy.XPATH, "//android.widget.ImageButton[@content-desc='Navigate up']")
 
+    # Tap methods
     def tap_continue(self):
-        btn = self.driver.find_element(AppiumBy.ID, self._CONTINUE_BTN_ID)
-        btn.click()
+        self.click(self._CONTINUE_BTN)
 
     def tap_skip(self):
-        btn = self.driver.find_element(AppiumBy.ID, self._SKIP_BIN_ID)
-        btn.click()
+        self.click(self._SKIP_BTN)
 
     def tap_get_started(self):
-        self.driver.find_element(AppiumBy.ID, self._GET_STARTED_BTN_ID).click()
+        self.click(self._GET_STARTED_BTN)
 
     def tap_add_language_button(self):
-        btn = self.wait.until(EC.presence_of_element_located((AppiumBy.ID, self._ADD_LANGUAGE_BTN_ID)))
-        btn.click()
+        self.click(self._ADD_LANGUAGE_BTN)
 
     def tap_add_language_in_list(self):
-        btn = self.wait.until(EC.presence_of_element_located((AppiumBy.XPATH, self._ADD_LANGUAGE_XPATH)))
-        btn.click()
+        self.click(self._ADD_LANGUAGE_ITEM)
 
     def tap_navigate_up(self):
-        btn = self.wait.until(EC.presence_of_element_located((AppiumBy.XPATH, self._NAVIGATE_UP_XPATH)))
-        btn.click()
+        self.click(self._NAVIGATE_UP_BTN)
 
+    # Visibility checkers
     def is_main_screen_visible(self):
-        return self.driver.find_element(AppiumBy.XPATH, self._MAIN_SCREEN_XPATH).is_displayed()
+        return self.is_visible(self._MAIN_SCREEN)
 
     def is_skip_button_visible(self):
-        return self.driver.find_element(AppiumBy.ID, self._SKIP_BIN_ID).is_displayed()
+        return self.is_visible(self._SKIP_BTN)
 
     def is_get_started_visible(self):
-        return self.driver.find_element(AppiumBy.ID, self._GET_STARTED_BTN_ID).is_displayed()
+        return self.is_visible(self._GET_STARTED_BTN)
 
     def is_continue_button_visible(self):
-        return self.driver.find_element(AppiumBy.ID, self._CONTINUE_BTN_ID).is_displayed()
+        return self.is_visible(self._CONTINUE_BTN)
 
     def is_add_language_button_visible(self):
-        return self.driver.find_element(AppiumBy.ID, self._ADD_LANGUAGE_BTN_ID).is_displayed()
+        return self.is_visible(self._ADD_LANGUAGE_BTN)
 
     def is_add_language_in_list_visible(self):
-        return self.driver.find_element(AppiumBy.XPATH, self._ADD_LANGUAGE_XPATH).is_displayed()
+        return self.is_visible(self._ADD_LANGUAGE_ITEM)
 
     def is_navigate_up_visible(self):
-        return self.driver.find_element(AppiumBy.XPATH, self._NAVIGATE_UP_XPATH).is_displayed()
+        return self.is_visible(self._NAVIGATE_UP_BTN)
