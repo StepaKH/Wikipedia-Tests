@@ -1,0 +1,510 @@
+--------- beginning of main
+04-14 00:23:07.213  4659  4659 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:23:07.239  4659  4659 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:23:08.022  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:23:08.233  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:08.234  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:23:08.234  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:08.234  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:08.234  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:08.235  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:08.235  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:08.235  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:08.277  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09b3138) locale list changing from [] to [en-US]
+04-14 00:23:08.279  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09af8f8) locale list changing from [] to [en-US]
+04-14 00:23:08.279  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09b3458) locale list changing from [] to [en-US]
+04-14 00:23:08.282  4659  4659 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:23:08.572  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:23:08.578  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09a91d8) locale list changing from [] to [en-US]
+04-14 00:23:08.795  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09ae638) locale list changing from [] to [en-US]
+04-14 00:23:08.808  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09ae318) locale list changing from [] to [en-US]
+04-14 00:23:08.821  4659  4659 I wikipedia.alpha: AssetManager2(0xb4000073e09b11f8) locale list changing from [] to [en-US]
+04-14 00:23:08.885  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:23:09.082  4659  4659 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:23:09.411  4659  4664 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:23:09.446  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:23:09.458  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:23:09.463  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:23:09.490  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:09.493  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:09.509  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:09.511  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:23:09.512  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:09.514  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:09.521  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:09.521  4659  4957 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:21.278  5518  5518 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:23:21.305  5518  5518 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:23:21.918  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:22.126  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:22.127  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:22.127  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:22.165  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09aec78) locale list changing from [] to [en-US]
+04-14 00:23:22.166  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09b24b8) locale list changing from [] to [en-US]
+04-14 00:23:22.167  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:23:22.169  5518  5518 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:23:22.482  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:23:22.485  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09b0258) locale list changing from [] to [en-US]
+04-14 00:23:22.681  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09ad378) locale list changing from [] to [en-US]
+04-14 00:23:22.697  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09b3458) locale list changing from [] to [en-US]
+04-14 00:23:22.710  5518  5518 I wikipedia.alpha: AssetManager2(0xb4000073e09adcd8) locale list changing from [] to [en-US]
+04-14 00:23:22.798  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:23:23.053  5518  5518 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:23:23.311  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:23:23.312  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:23:23.313  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:23:23.313  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:23.315  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:23.318  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:23.320  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:23:23.322  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:23.323  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:23.325  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:23.325  5518  5644 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:24.176  5518  5522 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:23:31.613  5882  5882 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:23:31.646  5882  5882 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:23:32.225  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:23:32.492  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:32.493  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:32.494  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:32.549  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:23:32.550  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:23:32.551  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:23:32.553  5882  5882 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:23:32.739  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b27d8) locale list changing from [] to [en-US]
+04-14 00:23:32.743  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:23:32.925  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b3138) locale list changing from [] to [en-US]
+04-14 00:23:32.955  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09af8f8) locale list changing from [] to [en-US]
+04-14 00:23:32.967  5882  5882 I wikipedia.alpha: AssetManager2(0xb4000073e09b3458) locale list changing from [] to [en-US]
+04-14 00:23:33.018  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:23:33.276  5882  5882 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:23:33.502  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:23:33.503  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:23:33.506  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:23:33.507  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:33.508  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:33.509  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:33.510  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:23:33.511  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:33.511  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:33.514  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:33.514  5882  5974 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:33.832  5882  5887 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:23:39.569  6215  6215 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:23:39.585  6215  6215 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:23:40.106  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:23:40.281  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:40.281  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:23:40.281  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:40.281  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:40.281  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:40.282  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:40.282  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:40.282  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:40.313  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09ab438) locale list changing from [] to [en-US]
+04-14 00:23:40.313  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:23:40.314  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:23:40.316  6215  6215 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:23:40.321  6215  6215 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:23:40.421  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:23:40.427  6215  6215 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:23:42.365  6215  6215 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mServices:Landroid/util/ArrayMap; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadServices$2; (domain=app) using reflection: allowed
+04-14 00:23:51.158  6551  6551 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:23:51.205  6551  6551 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:23:51.782  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:23:51.970  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:51.971  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:23:52.058  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:23:52.059  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:23:52.059  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:23:52.062  6551  6551 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:23:52.065  6551  6551 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:23:52.166  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09aec78) locale list changing from [] to [en-US]
+04-14 00:23:52.173  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:23:52.473  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:23:52.484  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09b2198) locale list changing from [] to [en-US]
+04-14 00:23:52.488  6551  6551 I wikipedia.alpha: AssetManager2(0xb4000073e09ae958) locale list changing from [] to [en-US]
+04-14 00:23:52.548  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:23:52.791  6551  6551 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:23:53.049  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:23:53.050  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:23:53.057  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:23:53.058  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:53.059  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:53.067  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:53.069  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:23:53.070  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:23:53.074  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:23:53.081  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:53.084  6551  6655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:23:54.223  6551  6555 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:24:00.707  6959  6959 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:24:00.745  6959  6959 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:24:01.544  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09b0578) locale list changing from [] to [en-US]
+04-14 00:24:01.840  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:01.842  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:01.909  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:24:01.910  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09b24b8) locale list changing from [] to [en-US]
+04-14 00:24:01.910  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:24:01.912  6959  6959 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:24:01.920  6959  6959 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:24:02.009  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09a5cb8) locale list changing from [] to [en-US]
+04-14 00:24:02.010  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09a91d8) locale list changing from [] to [en-US]
+04-14 00:24:02.211  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:24:02.230  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09ab438) locale list changing from [] to [en-US]
+04-14 00:24:02.235  6959  6959 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:24:02.282  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:24:02.600  6959  6959 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:24:03.271  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:24:03.273  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:24:03.274  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:24:03.274  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:24:03.276  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:03.277  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:03.278  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:24:03.280  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:24:03.281  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:03.284  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:24:03.285  6959  7122 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:24:04.172  6959  7249 W wikipedia.alpha: Verification of void org.wikipedia.feed.image.FeaturedImage.<clinit>() took 101.343ms (868.33 bytecodes/s) (0B arena alloc)
+04-14 00:24:04.846  6959  6966 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:24:14.141  8188  8188 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:24:14.160  8188  8188 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:24:15.268  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b0578) locale list changing from [] to [en-US]
+04-14 00:24:15.666  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:24:15.666  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:24:15.666  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:15.666  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:24:15.668  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:15.668  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:15.668  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:15.668  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:24:15.934  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:24:15.936  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b24b8) locale list changing from [] to [en-US]
+04-14 00:24:15.936  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:24:15.948  8188  8188 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:24:15.960  8188  8188 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:24:16.303  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:24:16.314  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:24:17.357  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09aec78) locale list changing from [] to [en-US]
+04-14 00:24:17.410  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b11f8) locale list changing from [] to [en-US]
+04-14 00:24:17.423  8188  8188 I wikipedia.alpha: AssetManager2(0xb4000073e09b0898) locale list changing from [] to [en-US]
+04-14 00:24:17.555  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:24:17.914  8188  8188 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:24:18.767  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:24:18.773  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:24:18.784  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:24:18.784  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:24:18.785  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:18.786  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:18.858  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:24:18.859  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:24:18.899  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:24:18.907  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:24:18.907  8188  8559 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:24:19.704  8188  8192 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:26:12.004  9870  9870 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:26:12.035  9870  9870 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:26:12.591  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:26:12.755  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:12.756  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:26:12.756  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:12.756  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:12.756  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:12.757  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:12.757  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:12.757  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:12.783  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09a91d8) locale list changing from [] to [en-US]
+04-14 00:26:12.783  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:26:12.784  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:26:12.785  9870  9870 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:26:12.790  9870  9870 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:26:12.888  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09aa498) locale list changing from [] to [en-US]
+04-14 00:26:12.891  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:26:13.131  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09b11f8) locale list changing from [] to [en-US]
+04-14 00:26:13.147  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09b2198) locale list changing from [] to [en-US]
+04-14 00:26:13.153  9870  9870 I wikipedia.alpha: AssetManager2(0xb4000073e09b0ed8) locale list changing from [] to [en-US]
+04-14 00:26:13.202  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:26:13.404  9870  9870 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:26:13.618  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:26:13.619  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:26:13.620  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:26:13.621  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:13.623  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:13.626  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:13.628  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:26:13.634  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:13.636  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:13.639  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:13.639  9870  9975 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:13.872  9870  9875 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:26:21.835 10221 10221 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:26:21.849 10221 10221 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:26:22.273 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:26:22.405 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:22.405 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:26:22.405 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:22.406 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:22.406 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:22.406 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:22.406 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:22.406 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:22.429 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09a6618) locale list changing from [] to [en-US]
+04-14 00:26:22.429 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09ab438) locale list changing from [] to [en-US]
+04-14 00:26:22.430 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09a91d8) locale list changing from [] to [en-US]
+04-14 00:26:22.431 10221 10221 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:26:22.432 10221 10221 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:26:22.455 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:26:22.456 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:26:22.590 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09af8f8) locale list changing from [] to [en-US]
+04-14 00:26:22.602 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09adcd8) locale list changing from [] to [en-US]
+04-14 00:26:22.609 10221 10221 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:26:22.645 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:26:22.884 10221 10221 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:26:23.395 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:26:23.410 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:26:23.420 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:26:23.424 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:23.430 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:23.432 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:23.433 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:26:23.434 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:23.437 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:23.440 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:23.441 10221 10312 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:24.133 10221 10227 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:26:28.939 10561 10561 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:26:28.959 10561 10561 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:26:29.421 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:26:29.652 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:29.653 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:26:29.653 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:29.654 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:29.654 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:29.654 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:29.654 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:29.654 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:29.685 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09a5cb8) locale list changing from [] to [en-US]
+04-14 00:26:29.685 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09a91d8) locale list changing from [] to [en-US]
+04-14 00:26:29.686 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:26:29.688 10561 10561 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:26:29.690 10561 10561 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:26:29.733 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:26:29.735 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:26:29.895 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:26:29.912 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09af8f8) locale list changing from [] to [en-US]
+04-14 00:26:29.922 10561 10561 I wikipedia.alpha: AssetManager2(0xb4000073e09b3458) locale list changing from [] to [en-US]
+04-14 00:26:29.970 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:26:30.174 10561 10561 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:26:30.381 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:26:30.383 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:26:30.385 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:26:30.385 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:30.388 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:30.390 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:30.393 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:26:30.394 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:30.396 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:30.400 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:30.400 10561 10655 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:31.227 10561 10566 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:26:36.894 10892 10892 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:26:36.919 10892 10892 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:26:37.428 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:37.596 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:26:37.621 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:26:37.622 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b27d8) locale list changing from [] to [en-US]
+04-14 00:26:37.622 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b24b8) locale list changing from [] to [en-US]
+04-14 00:26:37.623 10892 10892 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:26:37.626 10892 10892 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:26:37.678 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:26:37.679 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:26:37.832 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b3138) locale list changing from [] to [en-US]
+04-14 00:26:37.852 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09af8f8) locale list changing from [] to [en-US]
+04-14 00:26:37.861 10892 10892 I wikipedia.alpha: AssetManager2(0xb4000073e09b3458) locale list changing from [] to [en-US]
+04-14 00:26:37.898 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:26:38.096 10892 10892 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:26:38.567 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:26:38.570 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:26:38.572 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:26:38.573 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:38.578 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:38.593 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:38.594 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:26:38.594 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:26:38.610 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:26:38.624 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:38.624 10892 10980 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:26:39.137 10892 10897 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:27:08.874 11532 11532 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:27:08.909 11532 11532 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:27:09.700 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:27:10.037 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:10.037 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:10.039 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:10.098 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:27:10.098 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:27:10.098 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:27:10.107 11532 11532 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:27:10.136 11532 11532 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:27:10.328 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09a6618) locale list changing from [] to [en-US]
+04-14 00:27:10.389 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:27:11.062 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09b24b8) locale list changing from [] to [en-US]
+04-14 00:27:11.099 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09aa498) locale list changing from [] to [en-US]
+04-14 00:27:11.108 11532 11532 I wikipedia.alpha: AssetManager2(0xb4000073e09b11f8) locale list changing from [] to [en-US]
+04-14 00:27:11.194 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:27:11.547 11532 11532 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:27:12.773 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:27:12.776 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:27:12.777 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:27:12.778 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:12.780 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:12.783 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:12.787 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:27:12.791 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:12.793 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:12.797 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:12.797 11532 11803 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:13.459 11532 11537 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:27:19.491 11532 11538 W wikipedia.alpha: Cleared Reference was only reachable from finalizer (only reported once)
+04-14 00:27:19.550 11532 11538 I wikipedia.alpha: Background concurrent mark compact GC freed 20MB AllocSpace bytes, 85(5944KB) LOS objects, 49% free, 11MB/22MB, paused 993us,1.769ms total 147.293ms
+04-14 00:27:26.061 12292 12292 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:27:26.078 12292 12292 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:27:26.523 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:27:26.694 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:26.694 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:27:26.694 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:26.694 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:26.695 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:26.695 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:26.695 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:26.695 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:26.721 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:27:26.721 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09b3138) locale list changing from [] to [en-US]
+04-14 00:27:26.722 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09ad378) locale list changing from [] to [en-US]
+04-14 00:27:26.723 12292 12292 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:27:26.728 12292 12292 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:27:26.822 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09a5cb8) locale list changing from [] to [en-US]
+04-14 00:27:26.829 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09aba78) locale list changing from [] to [en-US]
+04-14 00:27:27.167 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09b0258) locale list changing from [] to [en-US]
+04-14 00:27:27.178 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09adcd8) locale list changing from [] to [en-US]
+04-14 00:27:27.182 12292 12292 I wikipedia.alpha: AssetManager2(0xb4000073e09ae638) locale list changing from [] to [en-US]
+04-14 00:27:27.272 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:27:27.546 12292 12292 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:27:28.059 12292 12296 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:27:28.079 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:27:28.080 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:27:28.120 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:27:28.124 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:28.126 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:28.127 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:28.136 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:27:28.141 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:28.142 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:28.151 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:28.156 12292 12384 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:36.461 12699 12699 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:27:36.495 12699 12699 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:27:37.124 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:27:37.296 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:37.297 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:27:37.297 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:37.297 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:37.298 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:37.298 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:37.298 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:37.298 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:37.339 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b27d8) locale list changing from [] to [en-US]
+04-14 00:27:37.340 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:27:37.340 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b0258) locale list changing from [] to [en-US]
+04-14 00:27:37.341 12699 12699 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:27:37.346 12699 12699 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:27:37.433 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b3138) locale list changing from [] to [en-US]
+04-14 00:27:37.434 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09ad378) locale list changing from [] to [en-US]
+04-14 00:27:37.701 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:27:37.713 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09b40d8) locale list changing from [] to [en-US]
+04-14 00:27:37.718 12699 12699 I wikipedia.alpha: AssetManager2(0xb4000073e09aec78) locale list changing from [] to [en-US]
+04-14 00:27:37.789 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:27:38.012 12699 12699 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:27:38.190 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:27:38.191 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:27:38.197 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:27:38.197 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:38.198 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:38.199 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:38.200 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:27:38.202 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:38.203 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:38.208 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:38.208 12699 12798 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:39.168 12699 12703 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
+04-14 00:27:48.561 13213 13213 I wikipedia.alpha: Late-enabling -Xcheck:jni
+04-14 00:27:48.577 13213 13213 I wikipedia.alpha: Using CollectorTypeCMC GC.
+04-14 00:27:49.001 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09b3a98) locale list changing from [] to [en-US]
+04-14 00:27:49.186 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/WindowManagerGlobal;->getInstance()Landroid/view/WindowManagerGlobal; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$windowManagerInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:49.186 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/view/WindowManagerGlobal;->mViews:Ljava/util/ArrayList; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowManagerSpy$mViewsField$2; (domain=app) using reflection: allowed
+04-14 00:27:49.187 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityThread;->mH:Landroid/app/ActivityThread$H; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:49.187 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/app/ActivityThread;->currentActivityThread()Landroid/app/ActivityThread; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher$activityThreadInstance$2; (domain=app) using reflection: allowed
+04-14 00:27:49.187 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/os/Handler;->mCallback:Landroid/os/Handler$Callback; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:49.188 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/util/Singleton;->mInstance:Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:49.188 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/util/Singleton;->get()Ljava/lang/Object; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:49.188 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Landroid/app/ActivityManager;->IActivityManagerSingleton:Landroid/util/Singleton; (runtime_flags=0, domain=platform, api=unsupported) from Lleakcanary/ServiceWatcher; (domain=app) using reflection: allowed
+04-14 00:27:49.361 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09a9b38) locale list changing from [] to [en-US]
+04-14 00:27:49.365 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09b1518) locale list changing from [] to [en-US]
+04-14 00:27:49.365 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09b3db8) locale list changing from [] to [en-US]
+04-14 00:27:49.369 13213 13213 W wikipedia.alpha: Failed to find entry 'classes.dex': Entry not found
+04-14 00:27:49.380 13213 13213 W wikipedia.alpha: Loading /data/app/~~a926WDt-cvFiVEkxWN-uDQ==/com.google.android.webview-r52t-Mqvihx6Qdn1ucU6Nw==/oat/arm64/base.odex non-executable as it requires an image which we failed to load
+04-14 00:27:49.470 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09aa498) locale list changing from [] to [en-US]
+04-14 00:27:49.472 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09b1e78) locale list changing from [] to [en-US]
+04-14 00:27:49.733 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09adcd8) locale list changing from [] to [en-US]
+04-14 00:27:49.757 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09ae318) locale list changing from [] to [en-US]
+04-14 00:27:49.765 13213 13213 I wikipedia.alpha: AssetManager2(0xb4000073e09a9818) locale list changing from [] to [en-US]
+04-14 00:27:49.809 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+04-14 00:27:50.032 13213 13213 I wikipedia.alpha: hiddenapi: Accessing hidden field Lcom/android/internal/policy/DecorView;->mWindow:Lcom/android/internal/policy/PhoneWindow; (runtime_flags=0, domain=platform, api=unsupported) from Lcurtains/internal/WindowSpy$windowField$2; (domain=app) using reflection: allowed
+04-14 00:27:50.193 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfigCollection; annotation class 10129
+04-14 00:27:50.198 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/StreamConfig; annotation class 10129
+04-14 00:27:50.201 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/CurationFilter; annotation class 10129
+04-14 00:27:50.203 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:50.205 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:50.209 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:50.212 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CollectionCurationRules; annotation class 10129
+04-14 00:27:50.213 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/CurationRules; annotation class 10129
+04-14 00:27:50.214 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/curation/ComparableCurationRules; annotation class 10129
+04-14 00:27:50.216 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:50.217 13213 13308 W wikipedia.alpha: Unable to resolve Lorg/wikimedia/metrics_platform/config/sampling/SampleConfig; annotation class 10126
+04-14 00:27:50.562 13213 13218 I wikipedia.alpha: Compiler allocated 5175KB to compile void android.view.ViewRootImpl.performTraversals()
