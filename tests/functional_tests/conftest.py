@@ -62,15 +62,24 @@ def onboarding(driver):
 @pytest.fixture(scope="function")
 def logger(request):
     test_name = request.node.name
-    test_file_dir = os.path.dirname(request.fspath)
+    test_file_path = request.fspath
 
-    log_dir = find_log_dir(test_file_dir)
-    if log_dir is None:
-        # Если директория не найдена, создадим дефолтную
-        log_dir = os.path.join(test_file_dir, "default_log")
-        os.makedirs(log_dir, exist_ok=True)
+    # Получаем корень проекта через pytest
+    project_root = str(request.config.rootdir)
 
-    return setup_logger(test_name, log_dir)
+    # Путь к общей папке logs в корне проекта
+    logs_root_dir = os.path.join(project_root, "logs")
+    os.makedirs(logs_root_dir, exist_ok=True)
+
+    # Извлекаем имя директории, где лежит тест
+    test_module_dir = os.path.basename(os.path.dirname(test_file_path))
+
+    # Создаём директорию для логов: <корень>/logs/<module>_logs
+    log_dir_name = f"{test_module_dir}_logs"
+    log_dir_path = os.path.join(project_root, "logs", log_dir_name)
+    os.makedirs(log_dir_path, exist_ok=True)
+
+    return setup_logger(test_name, log_dir_path)
 
 def run_adb_logcat(log_file):
     """Запускает adb logcat и записывает логи в файл."""
@@ -108,14 +117,22 @@ def stop_process(process):
 def device_logs(request):
     """Запускает и останавливает логирование ADB перед и после теста."""
     test_name = request.node.name
-    test_file_dir = os.path.dirname(request.fspath)
+    test_file_path = request.fspath
 
-    log_dir = find_log_dir(test_file_dir)
-    if log_dir is None:
-        log_dir = os.path.join(test_file_dir, "default_log")
-        os.makedirs(log_dir, exist_ok=True)
+    project_root = str(request.config.rootdir)
 
-    log_file = setup_logger_device(test_name, log_dir)
+    # Путь к общей папке logs в корне проекта
+    logs_root_dir = os.path.join(project_root, "logs")
+    os.makedirs(logs_root_dir, exist_ok=True)
+
+    test_module_dir = os.path.basename(os.path.dirname(test_file_path))
+
+    # Путь к логам: <корень>/logs/<module>_logs
+    log_dir_name = f"{test_module_dir}_logs"
+    log_dir_path = os.path.join(project_root, "logs", log_dir_name)
+    os.makedirs(log_dir_path, exist_ok=True)
+
+    log_file = setup_logger_device(test_name, log_dir_path)
 
     process = run_adb_logcat(log_file)
     if process:

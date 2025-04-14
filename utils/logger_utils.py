@@ -11,29 +11,31 @@ def find_log_dir(base_dir):
 
 def setup_logger(name: str, log_dir: str) -> logging.Logger:
     """Создаёт и настраивает логгер Python под конкретный тест"""
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
+
+    os.makedirs(log_dir, exist_ok=True)  # Без проверки — сразу создаём, если нет
 
     log_file = os.path.join(log_dir, f"{name}_code.log")
 
-    if os.path.exists(log_file):
+    # Чтобы не дублировать логи, удалим старый файл, если есть
+    if os.path.isfile(log_file):
         os.remove(log_file)
 
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
 
-    if not logger.handlers:
-        handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
+    # Удалим старые хендлеры, если вдруг фикстура вызывалась повторно
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    # Новый хендлер
+    handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
 
     return logger
 
 def setup_logger_device(name: str, log_dir: str):
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-
     log_file = os.path.join(log_dir, f"{name}_device.log")
 
     if os.path.exists(log_file):
