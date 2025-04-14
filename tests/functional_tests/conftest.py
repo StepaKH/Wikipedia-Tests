@@ -67,6 +67,10 @@ def logger(request):
     # Получаем корень проекта через pytest
     project_root = str(request.config.rootdir)
 
+    # Путь к общей папке logs в корне проекта
+    logs_root_dir = os.path.join(project_root, "logs")
+    os.makedirs(logs_root_dir, exist_ok=True)
+
     # Извлекаем имя директории, где лежит тест
     test_module_dir = os.path.basename(os.path.dirname(test_file_path))
 
@@ -116,6 +120,11 @@ def device_logs(request):
     test_file_path = request.fspath
 
     project_root = str(request.config.rootdir)
+
+    # Путь к общей папке logs в корне проекта
+    logs_root_dir = os.path.join(project_root, "logs")
+    os.makedirs(logs_root_dir, exist_ok=True)
+
     test_module_dir = os.path.basename(os.path.dirname(test_file_path))
 
     # Путь к логам: <корень>/logs/<module>_logs
