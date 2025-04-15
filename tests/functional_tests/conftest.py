@@ -2,8 +2,7 @@ import subprocess
 import signal
 import pytest
 import platform
-import time
-import socket
+from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
 from utils.logger_utils import *
@@ -12,42 +11,26 @@ ADB_TAG = "wikipedia.alpha"
 
 @pytest.fixture(scope="session", autouse=True)
 def appium_service():
-    """Автоматический запуск и остановка Appium сервера"""
+    """Запуск Appium сервера через AppiumService (кроссплатформенно и надёжно)"""
+    service = AppiumService()
+
     print("🚀 Запуск Appium сервера...")
+    service.start(
+        args=['--log-level', 'error'],
+        timeout_ms=15000
+    )
 
-    command = ["appium", "--log-level", "error"]
-
-    if platform.system() != "Windows":
-        process = subprocess.Popen(command, preexec_fn=os.setsid)
+    # Проверка, что сервер реально запущен
+    if service.is_running and service.is_listening:
+        print("✅ Appium сервер успешно запущен")
     else:
-        process = subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+        raise RuntimeError("❌ Appium сервер не запустился")
 
-    # Прямо внутри фикстуры: ожидание запуска Appium
-    start_time = time.time()
-    timeout = 15
-    while time.time() - start_time < timeout:
-        try:
-            with socket.create_connection(("127.0.0.1", 4723), timeout=2):
-                print("✅ Appium сервер успешно запущен")
-                break
-        except (OSError, ConnectionRefusedError):
-            time.sleep(1)
-    else:
-        print("❌ Appium сервер не запустился за 15 секунд")
-        process.terminate()
-        raise RuntimeError("Appium сервер не запустился")
-
-    yield  # Здесь запускаются тесты
+    yield  # Запуск тестов
 
     print("🛑 Остановка Appium сервера...")
-    try:
-        if platform.system() != "Windows":
-            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
-        else:
-            subprocess.call(['taskkill', '/F', '/T', '/PID', str(process.pid)])
-        print("✅ Appium сервер остановлен.")
-    except Exception as e:
-        print(f"❌ Ошибка при остановке Appium: {e}")
+    service.stop()
+    print("✅ Appium сервер остановлен.")
 
 @pytest.fixture(scope="function")
 def driver():
