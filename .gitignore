@@ -1,0 +1,18 @@
+# Игнорировать этот файл
+.gitignore
+
+# Test logs
+*_logs
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*.cpython-*.pyc
+*.cpython-*-pytest-*.pyc
+
+# System files
+.DS_Store
+
+# IDE files
+.idea/
+*.iml
