@@ -1,11 +1,13 @@
+import os
+
 class Config:
     """Конфигурация проекта"""
 
     # Адрес Appium-сервера
     APPIUM_SERVER_URL = "http://localhost:4723"
 
-    # Путь к APK-файлу
-    APP_PATH = r"C:/Users/Kirill_Satyukov/AndroidStudioProjects/apps-android-wikipedia/app/build/outputs/apk/alpha/debug/app-alpha-debug.apk"
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    APP_PATH = os.path.join(PROJECT_ROOT, "apk", "app-alpha-debug.apk")
 
     # Настройки Appium
     PLATFORM_NAME = "Android"

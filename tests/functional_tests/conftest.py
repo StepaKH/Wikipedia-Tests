@@ -1,53 +1,37 @@
 import subprocess
 import signal
 import pytest
+import allure
 import platform
-import time
-import socket
+import logging
+import os
+from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
-from utils.logger_utils import *
+from utils.logger_utils import setup_logger, setup_logger_device, get_logger
 
 ADB_TAG = "wikipedia.alpha"
 
+# Константы путей
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+LOGS_DIR = os.path.join(PROJECT_ROOT, "logs", "onboarding_logs")
+ALLURE_DIR = os.path.join(PROJECT_ROOT, "allure", "onboarding_allure")
+
+
 @pytest.fixture(scope="session", autouse=True)
 def appium_service():
-    """Автоматический запуск и остановка Appium сервера"""
+    """Запуск Appium сервера"""
+    service = AppiumService()
     print("🚀 Запуск Appium сервера...")
+    service.start(args=['--log-level', 'error'], timeout_ms=15000)
 
-    command = ["appium", "--log-level", "error"]
+    if not (service.is_running and service.is_listening):
+        raise RuntimeError("❌ Appium сервер не запустился")
 
-    if platform.system() != "Windows":
-        process = subprocess.Popen(command, preexec_fn=os.setsid)
-    else:
-        process = subprocess.Popen(command, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
-
-    # Прямо внутри фикстуры: ожидание запуска Appium
-    start_time = time.time()
-    timeout = 15
-    while time.time() - start_time < timeout:
-        try:
-            with socket.create_connection(("127.0.0.1", 4723), timeout=2):
-                print("✅ Appium сервер успешно запущен")
-                break
-        except (OSError, ConnectionRefusedError):
-            time.sleep(1)
-    else:
-        print("❌ Appium сервер не запустился за 15 секунд")
-        process.terminate()
-        raise RuntimeError("Appium сервер не запустился")
-
-    yield  # Здесь запускаются тесты
-
+    yield
     print("🛑 Остановка Appium сервера...")
-    try:
-        if platform.system() != "Windows":
-            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
-        else:
-            subprocess.call(['taskkill', '/F', '/T', '/PID', str(process.pid)])
-        print("✅ Appium сервер остановлен.")
-    except Exception as e:
-        print(f"❌ Ошибка при остановке Appium: {e}")
+    service.stop()
+
 
 @pytest.fixture(scope="function")
 def driver():
@@ -55,91 +39,107 @@ def driver():
     yield d
     d.quit()
 
+
 @pytest.fixture(scope="function")
 def onboarding(driver):
     return OnboardingPage(driver)
 
+
 @pytest.fixture(scope="function")
 def logger(request):
+    """Фикстура логгера для каждого теста с перезаписью файлов"""
     test_name = request.node.name
-    test_file_path = request.fspath
+    os.makedirs(LOGS_DIR, exist_ok=True)
 
-    # Получаем корень проекта через pytest
-    project_root = str(request.config.rootdir)
+    # Удаляем старый лог-файл если существует
+    log_file = os.path.join(LOGS_DIR, f"{test_name}.log")
+    if os.path.exists(log_file):
+        os.remove(log_file)
 
-    # Путь к общей папке logs в корне проекта
-    logs_root_dir = os.path.join(project_root, "logs")
-    os.makedirs(logs_root_dir, exist_ok=True)
+    logger = setup_logger(test_name, PROJECT_ROOT)
+    logger.info(f"🚀 Starting test: {test_name}")
 
-    # Извлекаем имя директории, где лежит тест
-    test_module_dir = os.path.basename(os.path.dirname(test_file_path))
+    yield logger
 
-    # Создаём директорию для логов: <корень>/logs/<module>_logs
-    log_dir_name = f"{test_module_dir}_logs"
-    log_dir_path = os.path.join(project_root, "logs", log_dir_name)
-    os.makedirs(log_dir_path, exist_ok=True)
+    logger.info(f"✅ Test finished: {test_name}")
+    for handler in logger.handlers:
+        handler.close()
+    logging.shutdown()
 
-    return setup_logger(test_name, log_dir_path)
 
-def run_adb_logcat(log_file):
-    """Запускает adb logcat и записывает логи в файл."""
+@pytest.fixture(scope="function", autouse=True)
+def device_logs(request, logger):
+    """Фикстура для логирования устройств с перезаписью"""
+    test_name = request.node.name
+    os.makedirs(LOGS_DIR, exist_ok=True)
+
+    # Удаляем старый лог устройства если существует
+    log_file = os.path.join(LOGS_DIR, f"{test_name}_device.log")
+    if os.path.exists(log_file):
+        os.remove(log_file)
+
+    # Очистка логов и настройка буфера
+    try:
+        subprocess.run(['adb', 'logcat', '-c'], check=True)
+        subprocess.run(['adb', 'logcat', '-G', '2M'], check=True)
+        logger.info("logcat очищен и буфер увеличен")
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Ошибка при очистке logcat: {e}")
+    except FileNotFoundError:
+        logger.error("adb не найден в PATH")
+        yield
+        return
+
+    # Запуск логирования
     try:
         kwargs = {
             'stdout': open(log_file, 'w', encoding='utf-8'),
-            'stderr': subprocess.STDOUT
+            'stderr': subprocess.STDOUT,
+            'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP if platform.system() == "Windows" else 0
         }
-        # Добавляем preexec_fn только на Unix-системах
-        if platform.system() != "Windows":
-            kwargs['preexec_fn'] = os.setsid
+        process = subprocess.Popen(['adb', 'logcat', f'{ADB_TAG}:I', '*:S'], **kwargs)
+        logger.info(f"Логирование девайса начато: {log_file}")
+    except Exception as e:
+        logger.error(f"Не удалось запустить adb logcat: {e}")
+        yield
+        return
 
-        process = subprocess.Popen(['adb', 'logcat', f'{ADB_TAG}:I', '*:S'],
-                                   **kwargs)
-        return process
-    except FileNotFoundError:
-        print("Ошибка: adb не найден в PATH.")
-        return None
+    yield
 
-def stop_process(process):
-    """Останавливает процесс."""
-    if process:
+    # Остановка процесса
+    try:
+        if platform.system() == "Windows":
+            subprocess.run(['taskkill', '/F', '/T', '/PID', str(process.pid)], check=True)
+        else:
+            os.killpg(os.getpgid(process.pid), signal.SIGTERM)
+        logger.info(f"Логирование завершено. Лог сохранён в {log_file}")
+    except Exception as e:
+        logger.error(f"Ошибка при остановке logcat: {e}")
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+
+    if rep.when == 'call' and rep.failed:
         try:
-            # Используем разные способы остановки процесса в зависимости от ОС
-            if platform.system() == "Windows":
-                subprocess.Popen(['taskkill', '/F', '/T', '/PID', str(process.pid)])
-            else:
-                os.killpg(os.getpgid(process.pid), signal.SIGTERM)
-            process.wait()
-            print("Процесс остановлен.")
-        except ProcessLookupError:
-            print("Процесс уже завершен.")
+            driver = item.funcargs['driver']
+            # Сохраняем скриншот в директорию allure
+            screenshot_dir = os.path.join(str(item.config.rootdir), "allure", "onboarding_allure")
+            os.makedirs(screenshot_dir, exist_ok=True)
+            screenshot_path = os.path.join(screenshot_dir, f"{item.nodeid.replace('::', '_')}.png")
+            driver.save_screenshot(screenshot_path)
 
-@pytest.fixture(scope="function")
-def device_logs(request):
-    """Запускает и останавливает логирование ADB перед и после теста."""
-    test_name = request.node.name
-    test_file_path = request.fspath
+            # Прикрепляем к allure отчету
+            allure.attach(
+                driver.get_screenshot_as_png(),
+                name="screenshot_on_failure",
+                attachment_type=allure.attachment_type.PNG
+            )
+        except Exception as e:
+            item.funcargs['logger'].error(f"Failed to take screenshot: {str(e)}")
 
-    project_root = str(request.config.rootdir)
-
-    # Путь к общей папке logs в корне проекта
-    logs_root_dir = os.path.join(project_root, "logs")
-    os.makedirs(logs_root_dir, exist_ok=True)
-
-    test_module_dir = os.path.basename(os.path.dirname(test_file_path))
-
-    # Путь к логам: <корень>/logs/<module>_logs
-    log_dir_name = f"{test_module_dir}_logs"
-    log_dir_path = os.path.join(project_root, "logs", log_dir_name)
-    os.makedirs(log_dir_path, exist_ok=True)
-
-    log_file = setup_logger_device(test_name, log_dir_path)
-
-    process = run_adb_logcat(log_file)
-    if process:
-        print(f"[{test_name}] Логирование в {log_file} началось.")
-        yield
-        stop_process(process)
-        print(f"[{test_name}] Логирование завершено. Лог сохранен в {log_file}")
-    else:
-        print(f"[{test_name}] Не удалось запустить adb logcat.")
-        yield
+def pytest_configure(config):
+    """Конфигурация pytest для сохранения Allure-отчетов"""
+    config.option.allure_report_dir = ALLURE_DIR

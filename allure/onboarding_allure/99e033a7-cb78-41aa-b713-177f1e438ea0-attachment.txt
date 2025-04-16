@@ -1,0 +1,25 @@
+WARNING  urllib3.connectionpool:connectionpool.py:868 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001CBA0FE1E80>, 'Connection to 127.0.0.1 timed out. (connect timeout=1.0)')': /status
+INFO     test_add_or_edit_languages:conftest.py:60 🚀 Starting test: test_add_or_edit_languages
+INFO     test_add_or_edit_languages:conftest.py:85 logcat очищен и буфер увеличен
+INFO     test_add_or_edit_languages:conftest.py:101 Логирование девайса начато: C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_add_or_edit_languages_device.log
+INFO     test_add_or_edit_languages:test_onboarding.py:10 === Начало теста: проверка кнопки 'Add or edit languages' ===
+DEBUG    test_add_or_edit_languages:test_onboarding.py:13 Проверяем видимость кнопки 'Add or edit languages'
+INFO     test_add_or_edit_languages:test_onboarding.py:16 Кнопка найдена и нажата
+DEBUG    test_add_or_edit_languages:test_onboarding.py:19 Ищем кнопку 'Add language' в списке
+INFO     test_add_or_edit_languages:test_onboarding.py:22 Перешли на экран добавления языка
+DEBUG    test_add_or_edit_languages:test_onboarding.py:25 Проверяем кнопку 'Navigate up'
+INFO     test_add_or_edit_languages:test_onboarding.py:28 Вернулись на предыдущий экран
+DEBUG    test_add_or_edit_languages:test_onboarding.py:31 Проверяем возврат на экран онбординга
+ERROR    test_add_or_edit_languages:test_onboarding.py:42 Текущая активность: org.wikipedia.settings.languages.WikipediaLanguagesActivity
+ERROR    test_add_or_edit_languages:test_onboarding.py:43 Доступные элементы: <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<hierarchy index="0" class="hierarchy" rotation="0" width="1080" height="2400">
+  <android.widget.FrameLayout index="0" package="org.wikipedia.alpha" class="android.widget.FrameLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,0][1080,2400]" displayed="true" a11y-important="true" screen...
+ERROR    test_add_or_edit_languages:test_onboarding.py:49 !!! Тест упал с ошибкой: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\Kirill_Satyukov\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\Kirill_Satyukov\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\Kirill_Satyukov\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+INFO     test_add_or_edit_languages:conftest.py:115 Логирование завершено. Лог сохранён в C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_add_or_edit_languages_device.log
+INFO     test_add_or_edit_languages:conftest.py:64 ✅ Test finished: test_add_or_edit_languages

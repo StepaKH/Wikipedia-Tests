@@ -1,0 +1,15 @@
+INFO     test_continue_through_all_screens:conftest.py:60 🚀 Starting test: test_continue_through_all_screens
+INFO     test_continue_through_all_screens:conftest.py:85 logcat очищен и буфер увеличен
+INFO     test_continue_through_all_screens:conftest.py:101 Логирование девайса начато: C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_continue_through_all_screens_device.log
+INFO     test_continue_through_all_screens:test_onboarding.py:58 === Начало теста: проход по всем экранам онбординга ===
+DEBUG    test_continue_through_all_screens:test_onboarding.py:62 Проверяем кнопку Continue на экране 1
+INFO     test_continue_through_all_screens:test_onboarding.py:65 Успешный переход на экран 2
+DEBUG    test_continue_through_all_screens:test_onboarding.py:62 Проверяем кнопку Continue на экране 2
+INFO     test_continue_through_all_screens:test_onboarding.py:65 Успешный переход на экран 3
+DEBUG    test_continue_through_all_screens:test_onboarding.py:62 Проверяем кнопку Continue на экране 3
+INFO     test_continue_through_all_screens:test_onboarding.py:65 Успешный переход на экран 4
+DEBUG    test_continue_through_all_screens:test_onboarding.py:68 Проверяем кнопку 'Get Started'
+INFO     test_continue_through_all_screens:test_onboarding.py:70 Все экраны пройдены успешно
+INFO     test_continue_through_all_screens:test_onboarding.py:72 === Тест успешно завершен ===
+INFO     test_continue_through_all_screens:conftest.py:115 Логирование завершено. Лог сохранён в C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_continue_through_all_screens_device.log
+INFO     test_continue_through_all_screens:conftest.py:64 ✅ Test finished: test_continue_through_all_screens

@@ -1,0 +1,12 @@
+INFO     test_skip_button_on_screens[0]:conftest.py:60 🚀 Starting test: test_skip_button_on_screens[0]
+INFO     test_skip_button_on_screens[0]:conftest.py:85 logcat очищен и буфер увеличен
+INFO     test_skip_button_on_screens[0]:conftest.py:101 Логирование девайса начато: C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_skip_button_on_screens[0]_device.log
+INFO     test_skip_button_on_screens[0]:test_onboarding.py:119 === Начало теста: проверка кнопки 'Skip' (экран 1) ===
+INFO     test_skip_button_on_screens[0]:test_onboarding.py:126 Успешно достигнут экран 1
+DEBUG    test_skip_button_on_screens[0]:test_onboarding.py:129 Ищем кнопку пропуска онбординга
+INFO     test_skip_button_on_screens[0]:test_onboarding.py:132 Кнопка найдена и нажата
+DEBUG    test_skip_button_on_screens[0]:test_onboarding.py:135 Проверяем отображение главного экрана
+INFO     test_skip_button_on_screens[0]:test_onboarding.py:137 Успешный переход на главный экран
+INFO     test_skip_button_on_screens[0]:test_onboarding.py:139 === Тест успешно завершен ===
+INFO     test_skip_button_on_screens[0]:conftest.py:115 Логирование завершено. Лог сохранён в C:\Users\Kirill_Satyukov\PycharmProjects\WikiTests\logs\onboarding_logs\test_skip_button_on_screens[0]_device.log
+INFO     test_skip_button_on_screens[0]:conftest.py:64 ✅ Test finished: test_skip_button_on_screens[0]
