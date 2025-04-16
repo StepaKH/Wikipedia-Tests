@@ -13,36 +13,33 @@ def test_add_or_edit_languages(onboarding, device_logs, logger):
             logger.debug("Проверяем видимость кнопки 'Add or edit languages'")
             assert onboarding.is_add_language_button_visible(), "Кнопка не отображается"
             onboarding.tap_add_language_button()
-            logger.info("Кнопка найдена и нажата")
+            logger.info("Кнопка 'Add or edit languages' найдена и нажата")
 
         with allure.step("2. Проверка экрана выбора языков"):
             logger.debug("Ищем кнопку 'Add language' в списке")
             assert onboarding.is_add_language_in_list_visible(), "Кнопка в списке не найдена"
+            logger.info("Находимся на следующем экране после онбординга")
             onboarding.tap_add_language_in_list()
-            logger.info("Перешли на экран добавления языка")
+            logger.info("Кнопка 'Add language' найдена и нажата")
 
         with allure.step("3. Возврат через навигацию"):
             logger.debug("Проверяем кнопку 'Navigate up'")
             assert onboarding.is_navigate_up_visible(), "Кнопка навигации не найдена"
+            logger.info("Находимся на экране добавления языка")
             onboarding.tap_navigate_up()
-            logger.info("Вернулись на предыдущий экран")
+            logger.info("Кнопка 'Navigate up' найдена и нажата")
 
-        with allure.step("4. Финальная проверка (с явным ожиданием)"):
-            logger.debug("Проверяем возврат на экран онбординга")
-            try:
-                # Добавляем явное ожидание
-                from selenium.webdriver.support.ui import WebDriverWait
-                from selenium.webdriver.support import expected_conditions as EC
-                WebDriverWait(onboarding.driver, 15).until(
-                    EC.visibility_of_element_located(onboarding._CONTINUE_BTN)
-                )
-                assert onboarding.is_continue_button_visible(), "Экран онбординга не отображается"
-                logger.info("Успешно вернулись на стартовый экран")
-            except Exception as e:
-                logger.error(f"Текущая активность: {onboarding.driver.current_activity}")
-                logger.error(f"Доступные элементы: {onboarding.driver.page_source[:500]}...")
-                raise
+        with allure.step("4. Возврат через навигацию"):
+            logger.debug("Проверяем кнопку 'Navigate up'")
+            assert onboarding.is_navigate_up_visible(), "Кнопка навигации не найдена"
+            logger.info("Вернулись на следующий после онбординга экран")
+            onboarding.tap_navigate_up()
+            logger.info("Кнопка 'Navigate up' найдена и нажата")
 
+        with allure.step("5. Финальная проверка"):
+            logger.debug("Проверяем, что вернулись на экран онбординга")
+            assert onboarding.is_continue_button_visible(), "Не вернулись на экран онбординга"
+            logger.info("Вернулись на экран онбординга")
         logger.info("=== Тест успешно завершен ===")
 
     except Exception as e:
@@ -59,10 +56,11 @@ def test_continue_through_all_screens(onboarding, device_logs, logger):
 
         for i in range(3):
             with allure.step(f"{i + 1}. Экран {i + 1}"):
-                logger.debug(f"Проверяем кнопку Continue на экране {i + 1}")
+                logger.debug(f"Проверяем кнопку 'Continue' на экране {i + 1}")
                 assert onboarding.is_continue_button_visible(), f"Кнопка не найдена на экране {i + 1}"
+                logger.info(f"Кнопка 'Continue' найдена на экране {i + 1}")
                 onboarding.tap_continue()
-                logger.info(f"Успешный переход на экран {i + 2}")
+                logger.info(f"Кнопка 'Continue' нажата на экране {i + 1}")
 
         with allure.step("4. Проверка финального экрана"):
             logger.debug("Проверяем кнопку 'Get Started'")
@@ -73,7 +71,6 @@ def test_continue_through_all_screens(onboarding, device_logs, logger):
 
     except Exception as e:
         logger.error(f"!!! Тест упал на экране {i + 1}: {str(e)}")
-        onboarding.driver.save_screenshot(f"error_continue_screen_{i + 1}.png")
         raise
 
 
@@ -106,7 +103,6 @@ def test_get_started_button(onboarding, device_logs, logger):
 
     except Exception as e:
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
-        onboarding.driver.save_screenshot("error_get_started.png")
         raise
 
 
@@ -140,5 +136,4 @@ def test_skip_button_on_screens(onboarding, screen_count, device_logs, logger):
 
     except Exception as e:
         logger.error(f"!!! Тест упал на экране {screen_count + 1}: {str(e)}")
-        onboarding.driver.save_screenshot(f"error_skip_screen_{screen_count + 1}.png")
         raise
