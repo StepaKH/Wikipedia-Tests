@@ -47,3 +47,22 @@ def setup_logger_device(name: str, log_dir: str):
         os.remove(log_file)
 
     return log_file
+
+def setup_service_logger(test_name: str, log_dir: str) -> logging.Logger:
+    log_file = os.path.join(log_dir, f"{test_name}_service.log")
+
+    if os.path.isfile(log_file):
+        os.remove(log_file)
+
+    logger = logging.getLogger(f"{test_name}_service")
+    logger.setLevel(logging.INFO)
+
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    handler = logging.FileHandler(log_file, encoding='utf-8', mode='w')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+
+    logger.addHandler(handler)
+    return logger

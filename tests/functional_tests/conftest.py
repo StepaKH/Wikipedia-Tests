@@ -4,11 +4,11 @@ import pytest
 import allure
 import platform
 import os
-import shutil
+import logging
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
-from utils.logger_utils import setup_logger, setup_logger_device
+from utils.logger_utils import setup_logger, setup_logger_device, setup_service_logger
 
 ADB_TAG = "wikipedia.alpha"
 
@@ -19,16 +19,38 @@ _ALLURE_DIR = os.path.join(_PROJECT_ROOT, "allure")
 @pytest.fixture(scope="session", autouse=True)
 def appium_service():
     """Запуск Appium сервера"""
+    # Создаём логгер отдельный для Appium
+    logs_root_dir = os.path.join(_PROJECT_ROOT, "logs", "session")
+    os.makedirs(logs_root_dir, exist_ok=True)
+    log_file = os.path.join(logs_root_dir, "appium_service.log")
+
+    # Настраиваем логгер
+    logger = logging.getLogger("appium_service")
+    logger.setLevel(logging.DEBUG)
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    file_handler = logging.FileHandler(log_file, mode='w', encoding='utf-8')
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    logger.info("🚀 Запуск Appium сервера...")
+
     service = AppiumService()
-    print("🚀 Запуск Appium сервера...")
     service.start(args=['--log-level', 'error'], timeout_ms=15000)
 
     if not (service.is_running and service.is_listening):
-        raise RuntimeError("❌ Appium сервер не запустился")
+        logger.error("❌ Appium сервер не запустился")
+        raise RuntimeError("Appium сервер не запустился")
+
+    logger.info("✅ Appium сервер успешно запущен")
 
     yield
-    print("🛑 Остановка Appium сервера...")
+
+    logger.info("🛑 Остановка Appium сервера...")
     service.stop()
+    logger.info("✅ Appium сервер остановлен")
 
 @pytest.fixture(scope="function")
 def driver():
@@ -68,34 +90,44 @@ def logger(request):
 
     logger.info(f"✅ Test finished: {test_name}")
 
-@pytest.fixture(scope="function", autouse=True)
-def device_logs(request):
-    """Автоматический запуск/остановка adb logcat перед каждым тестом с очисткой и увеличением буфера"""
+@pytest.fixture(scope="function")
+def service_logger(request):
+    """Логгер инфраструктурного уровня — для фикстур вроде device_logs и appium_service"""
     test_name = request.node.name
     test_file_path = request.fspath
     project_root = str(request.config.rootdir)
 
-    # Путь к логам
     test_module_dir = os.path.basename(os.path.dirname(test_file_path))
     log_dir_path = os.path.join(project_root, "logs", f"{test_module_dir}_logs")
     os.makedirs(log_dir_path, exist_ok=True)
 
-    # Подготовка файла лога
+    return setup_service_logger(test_name, log_dir_path)
+
+@pytest.fixture(scope="function", autouse=True)
+def device_logs(request, service_logger):
+    test_name = request.node.name
+    test_file_path = request.fspath
+    project_root = str(request.config.rootdir)
+
+    test_module_dir = os.path.basename(os.path.dirname(test_file_path))
+    log_dir_path = os.path.join(project_root, "logs", f"{test_module_dir}_logs")
+    os.makedirs(log_dir_path, exist_ok=True)
+
     log_file = setup_logger_device(test_name, log_dir_path)
 
-    # Очистка логов и настройка буфера
     try:
         subprocess.run(['adb', 'logcat', '-c'], check=True)
         subprocess.run(['adb', 'logcat', '-G', '2M'], check=True)
-        print("✅ logcat очищен и буфер увеличен")
+        service_logger.info("✅ logcat очищен и буфер увеличен")
     except subprocess.CalledProcessError as e:
-        print(f"❌ Ошибка при очистке logcat или установке буфера: {e}")
+        service_logger.error(f"❌ Ошибка при очистке logcat или установке буфера: {e}")
+        yield
+        return
     except FileNotFoundError:
-        print("❌ adb не найден в PATH")
+        service_logger.error("❌ adb не найден в PATH")
         yield
         return
 
-    # Запуск логирования
     try:
         kwargs = {
             'stdout': open(log_file, 'w', encoding='utf-8'),
@@ -105,24 +137,23 @@ def device_logs(request):
             kwargs['preexec_fn'] = os.setsid
 
         process = subprocess.Popen(['adb', 'logcat', f'{ADB_TAG}:I', '*:S'], **kwargs)
-        print(f"[{test_name}] 🔍 Логирование девайса начато: {log_file}")
+        service_logger.info(f"🔍 Логирование девайса начато: {log_file}")
     except Exception as e:
-        print(f"[{test_name}] ❌ Не удалось запустить adb logcat: {e}")
+        service_logger.error(f"❌ Не удалось запустить adb logcat: {e}")
         yield
         return
 
-    yield  # Тест выполняется
+    yield
 
-    # Остановка процесса
     try:
         if platform.system() == "Windows":
             subprocess.run(['taskkill', '/F', '/T', '/PID', str(process.pid)], check=True)
         else:
             os.killpg(os.getpgid(process.pid), signal.SIGTERM)
         process.wait()
-        print(f"[{test_name}] ✅ Логирование завершено. Лог сохранён в {log_file}")
+        service_logger.info(f"✅ Логирование завершено. Лог сохранён в {log_file}")
     except Exception as e:
-        print(f"[{test_name}] ❌ Ошибка при остановке logcat процесса: {e}")
+        service_logger.error(f"❌ Ошибка при остановке logcat процесса: {e}")
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
