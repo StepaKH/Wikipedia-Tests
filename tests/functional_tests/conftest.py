@@ -4,6 +4,7 @@ import pytest
 import allure
 import platform
 import os
+import shutil
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
@@ -12,8 +13,8 @@ from utils.logger_utils import setup_logger, setup_logger_device
 ADB_TAG = "wikipedia.alpha"
 
 # Константы путей
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-ALLURE_DIR = os.path.join(PROJECT_ROOT, "allure", "onboarding_allure")
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ALLURE_DIR = os.path.join(_PROJECT_ROOT, "allure")
 
 @pytest.fixture(scope="session", autouse=True)
 def appium_service():
@@ -29,18 +30,15 @@ def appium_service():
     print("🛑 Остановка Appium сервера...")
     service.stop()
 
-
 @pytest.fixture(scope="function")
 def driver():
     d = create_driver()
     yield d
     d.quit()
 
-
 @pytest.fixture(scope="function")
 def onboarding(driver):
     return OnboardingPage(driver)
-
 
 @pytest.fixture(scope="function")
 def logger(request):
@@ -69,7 +67,6 @@ def logger(request):
     yield logger
 
     logger.info(f"✅ Test finished: {test_name}")
-
 
 @pytest.fixture(scope="function", autouse=True)
 def device_logs(request):
@@ -127,7 +124,6 @@ def device_logs(request):
     except Exception as e:
         print(f"[{test_name}] ❌ Ошибка при остановке logcat процесса: {e}")
 
-
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     outcome = yield
@@ -137,7 +133,7 @@ def pytest_runtest_makereport(item, call):
         try:
             driver = item.funcargs['driver']
             # Сохраняем скриншот в директорию allure
-            screenshot_dir = os.path.join(str(item.config.rootdir), "allure", "onboarding_allure")
+            screenshot_dir = _ALLURE_DIR
             os.makedirs(screenshot_dir, exist_ok=True)
             screenshot_path = os.path.join(screenshot_dir, f"{item.nodeid.replace('::', '_')}.png")
             driver.save_screenshot(screenshot_path)
@@ -153,4 +149,4 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_configure(config):
     """Конфигурация pytest для сохранения Allure-отчетов"""
-    config.option.allure_report_dir = ALLURE_DIR
+    config.option.allure_report_dir = _ALLURE_DIR
