@@ -3,11 +3,23 @@ import allure
 
 @pytest.mark.onboarding
 @pytest.mark.smoke
+@allure.description("""
+**Сценарий:** Проверка работы с языками в процессе онбординга.
+
+**Шаги:**
+1. Начальный экран: проверка кнопки 'Add or edit languages'.
+2. Экран выбора языков: проверка кнопки 'Add language'.
+3. Двойной возврат через системную навигацию.
+4. Финальная проверка возврата на стартовый экран.
+
+**Ожидаемый результат:**
+- Все кнопки отображаются и кликабельны.
+- Навигация возвращает пользователя на предыдущие экраны без ошибок.
+""")
 def test_add_or_edit_languages(onboarding, device_logs, logger):
     """Тест кнопки 'Add or edit languages' и навигации обратно"""
     try:
         logger.info("=== Начало теста: проверка кнопки 'Add or edit languages' ===")
-
         with allure.step("1. Проверка начального экрана"):
             logger.debug("Проверяем видимость кнопки 'Add or edit languages'")
             assert onboarding.is_add_language_button_visible(), "Кнопка не отображается"
@@ -45,9 +57,17 @@ def test_add_or_edit_languages(onboarding, device_logs, logger):
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
         raise
 
-
 @pytest.mark.onboarding
 @pytest.mark.smoke
+@allure.description("""
+**Smoke-тест онбординга:**
+1. Последовательно проверяет все 3 экрана:
+   - Кнопка 'Continue' должна быть видима.
+   - Нажатие приводит к переходу дальше.
+2. Финальный экран:
+   - Должна отображаться кнопка 'Get Started'.
+Логируется номер текущего экрана при ошибках.
+""")
 def test_continue_through_all_screens(onboarding, device_logs, logger):
     """Тестирование кнопки 'Continue' на всех экранах онбординга"""
     try:
@@ -63,7 +83,7 @@ def test_continue_through_all_screens(onboarding, device_logs, logger):
 
         with allure.step("4. Проверка финального экрана"):
             logger.debug("Проверяем кнопку 'Get Started'")
-            assert onboarding.is_get_started_visible(), "Кнопка завершения не найдена"
+            assert onboarding.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
             logger.info("Все экраны пройдены успешно")
 
         logger.info("=== Тест успешно завершен ===")
@@ -72,9 +92,14 @@ def test_continue_through_all_screens(onboarding, device_logs, logger):
         logger.error(f"!!! Тест упал на экране {i + 1}: {str(e)}")
         raise
 
-
 @pytest.mark.onboarding
 @pytest.mark.smoke
+@allure.description("""
+Smoke-тест финального этапа онбординга:
+- Логирует пропуск каждого из 3 экранов.
+- Валидирует отображение и функциональность 'Get Started'.
+- Проверяет переход на главный экран.
+""")
 def test_get_started_button(onboarding, device_logs, logger):
     """Тестирование кнопки 'Get Started' на последнем экране онбординга"""
     try:
@@ -83,7 +108,7 @@ def test_get_started_button(onboarding, device_logs, logger):
         with allure.step("1. Пропуск первых экранов"):
             for i in range(3):
                 logger.debug(f"Пропускаем экран {i + 1}")
-                assert onboarding.is_continue_button_visible(), f"Не удалось найти кнопку на экране {i + 1}"
+                assert onboarding.is_continue_button_visible(), f"Не удалось найти кнопку 'Continue' на экране {i + 1}"
                 onboarding.tap_continue()
             logger.info("Успешно пропущены 3 экрана онбординга")
 
@@ -91,7 +116,7 @@ def test_get_started_button(onboarding, device_logs, logger):
             logger.debug("Ищем кнопку завершения онбординга")
             assert onboarding.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
             onboarding.tap_get_started()
-            logger.info("Кнопка найдена и нажата")
+            logger.info("Кнопка 'Get Started' найдена и нажата")
 
         with allure.step("3. Проверка главного экрана"):
             logger.debug("Проверяем отображение главного экрана")
@@ -104,10 +129,15 @@ def test_get_started_button(onboarding, device_logs, logger):
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
         raise
 
-
 @pytest.mark.onboarding
 @pytest.mark.smoke
 @pytest.mark.parametrize("screen_count", [0, 1, 2])
+@allure.description("""
+Параметризованный тест проверки кнопки 'Skip' на разных экранах онбординга.
+Проверяет:
+1. Возможность пропустить онбординг с каждого из экранов (0-2)
+2. Корректность перехода на главный экран после нажатия 'Skip'
+""")
 def test_skip_button_on_screens(onboarding, screen_count, device_logs, logger):
     """Проверка кнопки 'Skip' на разных экранах онбординга"""
     try:
