@@ -1,7 +1,6 @@
 import pytest
 import allure
 
-
 @pytest.mark.onboarding
 @pytest.mark.smoke
 @allure.description("""
@@ -58,7 +57,6 @@ def test_add_or_edit_languages(onboarding, device_logs, logger):
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
         raise
 
-
 @pytest.mark.onboarding
 @pytest.mark.smoke
 @allure.description("""
@@ -93,7 +91,6 @@ def test_continue_through_all_screens(onboarding, device_logs, logger):
     except Exception as e:
         logger.error(f"!!! Тест упал на экране {i + 1}: {str(e)}")
         raise
-
 
 @pytest.mark.onboarding
 @pytest.mark.smoke
@@ -131,7 +128,6 @@ def test_get_started_button(onboarding, device_logs, logger):
     except Exception as e:
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
         raise
-
 
 @pytest.mark.onboarding
 @pytest.mark.smoke

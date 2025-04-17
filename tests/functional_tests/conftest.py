@@ -109,6 +109,7 @@ def device_logs(request, service_logger):
     test_file_path = request.fspath
     project_root = str(request.config.rootdir)
 
+    # Путь к логам
     test_module_dir = os.path.basename(os.path.dirname(test_file_path))
     log_dir_path = os.path.join(project_root, "logs", f"{test_module_dir}_logs")
     os.makedirs(log_dir_path, exist_ok=True)
