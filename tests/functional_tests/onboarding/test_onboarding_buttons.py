@@ -16,40 +16,41 @@ import allure
 - Все кнопки отображаются и кликабельны.
 - Навигация возвращает пользователя на предыдущие экраны без ошибок.
 """)
-def test_add_or_edit_languages(onboarding, device_logs, logger):
+def test_add_or_edit_languages(pages, device_logs, logger):
     """Тест кнопки 'Add or edit languages' и навигации обратно"""
     try:
+        onboarding = pages.onboarding
         logger.info("=== Начало теста: проверка кнопки 'Add or edit languages' ===")
         with allure.step("1. Проверка начального экрана"):
             logger.debug("Проверяем видимость кнопки 'Add or edit languages'")
-            assert onboarding.is_add_language_button_visible(), "Кнопка не отображается"
-            onboarding.tap_add_language_button()
+            assert onboarding.buttons.is_add_language_button_visible(), "Кнопка не отображается"
+            onboarding.buttons.tap_add_language_button()
             logger.info("Кнопка 'Add or edit languages' найдена и нажата")
 
         with allure.step("2. Проверка экрана выбора языков"):
             logger.debug("Ищем кнопку 'Add language' в списке")
-            assert onboarding.is_add_language_in_list_visible(), "Кнопка в списке не найдена"
+            assert onboarding.buttons.is_add_language_in_list_visible(), "Кнопка в списке не найдена"
             logger.info("Находимся на следующем экране после онбординга")
-            onboarding.tap_add_language_in_list()
+            onboarding.buttons.tap_add_language_in_list()
             logger.info("Кнопка 'Add language' найдена и нажата")
 
         with allure.step("3. Возврат через навигацию"):
             logger.debug("Проверяем кнопку 'Navigate up'")
-            assert onboarding.is_navigate_up_visible(), "Кнопка навигации не найдена"
+            assert onboarding.buttons.is_navigate_up_visible(), "Кнопка навигации не найдена"
             logger.info("Находимся на экране добавления языка")
-            onboarding.tap_navigate_up()
+            onboarding.buttons.tap_navigate_up()
             logger.info("Кнопка 'Navigate up' найдена и нажата")
 
         with allure.step("4. Возврат через навигацию"):
             logger.debug("Проверяем кнопку 'Navigate up'")
-            assert onboarding.is_navigate_up_visible(), "Кнопка навигации не найдена"
+            assert onboarding.buttons.is_navigate_up_visible(), "Кнопка навигации не найдена"
             logger.info("Вернулись на следующий после онбординга экран")
-            onboarding.tap_navigate_up()
+            onboarding.buttons.tap_navigate_up()
             logger.info("Кнопка 'Navigate up' найдена и нажата")
 
         with allure.step("5. Финальная проверка"):
             logger.debug("Проверяем, что вернулись на экран онбординга")
-            assert onboarding.is_continue_button_visible(), "Не вернулись на экран онбординга"
+            assert onboarding.buttons.is_continue_button_visible(), "Не вернулись на экран онбординга"
             logger.info("Вернулись на экран онбординга")
         logger.info("=== Тест успешно завершен ===")
 
@@ -68,22 +69,23 @@ def test_add_or_edit_languages(onboarding, device_logs, logger):
    - Должна отображаться кнопка 'Get Started'.
 Логируется номер текущего экрана при ошибках.
 """)
-def test_continue_through_all_screens(onboarding, device_logs, logger):
+def test_continue_through_all_screens(pages, device_logs, logger):
     """Тестирование кнопки 'Continue' на всех экранах онбординга"""
     try:
+        onboarding = pages.onboarding
         logger.info("=== Начало теста: проход по всем экранам онбординга ===")
 
         for i in range(3):
             with allure.step(f"{i + 1}. Экран {i + 1}"):
                 logger.debug(f"Проверяем кнопку 'Continue' на экране {i + 1}")
-                assert onboarding.is_continue_button_visible(), f"Кнопка не найдена на экране {i + 1}"
+                assert onboarding.buttons.is_continue_button_visible(), f"Кнопка не найдена на экране {i + 1}"
                 logger.info(f"Кнопка 'Continue' найдена на экране {i + 1}")
-                onboarding.tap_continue()
+                onboarding.buttons.tap_continue()
                 logger.info(f"Кнопка 'Continue' нажата на экране {i + 1}")
 
         with allure.step("4. Проверка финального экрана"):
             logger.debug("Проверяем кнопку 'Get Started'")
-            assert onboarding.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
+            assert onboarding.buttons.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
             logger.info("Все экраны пройдены успешно")
 
         logger.info("=== Тест успешно завершен ===")
@@ -100,27 +102,28 @@ Smoke-тест финального этапа онбординга:
 - Валидирует отображение и функциональность 'Get Started'.
 - Проверяет переход на главный экран.
 """)
-def test_get_started_button(onboarding, device_logs, logger):
+def test_get_started_button(pages, device_logs, logger):
     """Тестирование кнопки 'Get Started' на последнем экране онбординга"""
     try:
+        onboarding = pages.onboarding
         logger.info("=== Начало теста: проверка кнопки 'Get Started' ===")
 
         with allure.step("1. Пропуск первых экранов"):
             for i in range(3):
                 logger.debug(f"Пропускаем экран {i + 1}")
-                assert onboarding.is_continue_button_visible(), f"Не удалось найти кнопку 'Continue' на экране {i + 1}"
-                onboarding.tap_continue()
+                assert onboarding.buttons.is_continue_button_visible(), f"Не удалось найти кнопку 'Continue' на экране {i + 1}"
+                onboarding.buttons.tap_continue()
             logger.info("Успешно пропущены 3 экрана онбординга")
 
         with allure.step("2. Проверка кнопки 'Get Started'"):
             logger.debug("Ищем кнопку завершения онбординга")
-            assert onboarding.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
-            onboarding.tap_get_started()
+            assert onboarding.buttons.is_get_started_visible(), "Кнопка 'Get Started' не найдена"
+            onboarding.buttons.tap_get_started()
             logger.info("Кнопка 'Get Started' найдена и нажата")
 
         with allure.step("3. Проверка главного экрана"):
             logger.debug("Проверяем отображение главного экрана")
-            assert onboarding.is_main_screen_visible(), "Главный экран не отобразился"
+            assert onboarding.buttons.is_main_screen_visible(), "Главный экран не отобразился"
             logger.info("Успешный переход на главный экран")
 
         logger.info("=== Тест успешно завершен ===")
@@ -138,27 +141,28 @@ def test_get_started_button(onboarding, device_logs, logger):
 1. Возможность пропустить онбординг с каждого из экранов (0-2)
 2. Корректность перехода на главный экран после нажатия 'Skip'
 """)
-def test_skip_button_on_screens(onboarding, screen_count, device_logs, logger):
+def test_skip_button_on_screens(pages, screen_count, device_logs, logger):
     """Проверка кнопки 'Skip' на разных экранах онбординга"""
     try:
+        onboarding = pages.onboarding
         logger.info(f"=== Начало теста: проверка кнопки 'Skip' (экран {screen_count + 1}) ===")
 
         with allure.step("1. Навигация до целевого экрана"):
             for i in range(screen_count):
                 logger.debug(f"Переход через экран {i + 1}")
-                assert onboarding.is_continue_button_visible(), f"Не удалось найти кнопку Continue на экране {i + 1}"
-                onboarding.tap_continue()
+                assert onboarding.buttons.is_continue_button_visible(), f"Не удалось найти кнопку Continue на экране {i + 1}"
+                onboarding.buttons.tap_continue()
             logger.info(f"Успешно достигнут экран {screen_count + 1}")
 
         with allure.step("2. Проверка кнопки 'Skip'"):
             logger.debug("Ищем кнопку пропуска онбординга")
-            assert onboarding.is_skip_button_visible(), "Кнопка 'Skip' не найдена"
-            onboarding.tap_skip()
+            assert onboarding.buttons.is_skip_button_visible(), "Кнопка 'Skip' не найдена"
+            onboarding.buttons.tap_skip()
             logger.info("Кнопка найдена и нажата")
 
         with allure.step("3. Проверка главного экрана"):
             logger.debug("Проверяем отображение главного экрана")
-            assert onboarding.is_main_screen_visible(), "Главный экран не отобразился"
+            assert onboarding.buttons.is_main_screen_visible(), "Главный экран не отобразился"
             logger.info("Успешный переход на главный экран")
 
         logger.info("=== Тест успешно завершен ===")

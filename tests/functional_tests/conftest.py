@@ -7,7 +7,7 @@ import os
 import logging
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
-from pages.functional_tests_page.onboarding_pages.onboarding_page import OnboardingPage
+from pages.functional_tests_page.all_pages import AllPages
 from utils.logger_utils import setup_logger, setup_logger_device, setup_service_logger
 
 ADB_TAG = "wikipedia.alpha"
@@ -59,8 +59,8 @@ def driver():
     d.quit()
 
 @pytest.fixture(scope="function")
-def onboarding(driver):
-    return OnboardingPage(driver)
+def pages(driver):
+    return AllPages(driver)
 
 @pytest.fixture(scope="function")
 def logger(request):
