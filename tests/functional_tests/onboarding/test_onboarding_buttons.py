@@ -16,7 +16,7 @@ import allure
 - Все кнопки отображаются и кликабельны.
 - Навигация возвращает пользователя на предыдущие экраны без ошибок.
 """)
-def test_add_or_edit_languages(pages, device_logs, logger):
+def test_add_or_edit_languages(pages, logger):
     """Тест кнопки 'Add or edit languages' и навигации обратно"""
     try:
         onboarding = pages.onboarding
@@ -69,7 +69,7 @@ def test_add_or_edit_languages(pages, device_logs, logger):
    - Должна отображаться кнопка 'Get Started'.
 Логируется номер текущего экрана при ошибках.
 """)
-def test_continue_through_all_screens(pages, device_logs, logger):
+def test_continue_through_all_screens(pages, logger):
     """Тестирование кнопки 'Continue' на всех экранах онбординга"""
     try:
         onboarding = pages.onboarding
@@ -102,7 +102,7 @@ Smoke-тест финального этапа онбординга:
 - Валидирует отображение и функциональность 'Get Started'.
 - Проверяет переход на главный экран.
 """)
-def test_get_started_button(pages, device_logs, logger):
+def test_get_started_button(pages, logger):
     """Тестирование кнопки 'Get Started' на последнем экране онбординга"""
     try:
         onboarding = pages.onboarding
@@ -141,7 +141,7 @@ def test_get_started_button(pages, device_logs, logger):
 1. Возможность пропустить онбординг с каждого из экранов (0-2)
 2. Корректность перехода на главный экран после нажатия 'Skip'
 """)
-def test_skip_button_on_screens(pages, screen_count, device_logs, logger):
+def test_skip_button_on_screens(pages, screen_count, logger):
     """Проверка кнопки 'Skip' на разных экранах онбординга"""
     try:
         onboarding = pages.onboarding

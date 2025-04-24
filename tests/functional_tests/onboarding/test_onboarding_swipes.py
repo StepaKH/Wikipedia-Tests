@@ -8,7 +8,7 @@ import allure
 2. Последовательно свайпаем назад через все экраны (4 → 1)
 Для каждого перехода проверяется корректность отображения экрана.
 """)
-def test_full_onboarding_swipe_navigation(pages, device_logs, logger):
+def test_full_onboarding_swipe_navigation(pages, logger):
     """Полная проверка навигации по онбордингу свайпами"""
     try:
         onboarding = pages.onboarding.swipes
