@@ -2,7 +2,7 @@ from pages.functional_tests_page.onboarding_pages.buttons import OnboardingButto
 from pages.functional_tests_page.onboarding_pages.swipes import OnboardingSwipes
 
 class OnboardingPage:
-    def __init__(self, driver):
+    def __init__(self, driver, logger=None):
         self.driver = driver
         self.buttons = OnboardingButtons(driver)
-        self.swipes = OnboardingSwipes(driver)
+        self.swipes = OnboardingSwipes(driver, logger=logger)

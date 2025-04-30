@@ -59,8 +59,8 @@ def driver():
     d.quit()
 
 @pytest.fixture(scope="function")
-def pages(driver):
-    return AllPages(driver)
+def pages(driver, logger):
+    return AllPages(driver, logger)
 
 @pytest.fixture(scope="function")
 def logger(request):
