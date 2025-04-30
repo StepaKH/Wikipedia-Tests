@@ -20,4 +20,5 @@ class ClickActions:
         element = self.is_visible(by_locator)
         if element:
             self.click(by_locator)
+
         return element
