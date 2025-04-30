@@ -59,8 +59,8 @@ def driver():
     d.quit()
 
 @pytest.fixture(scope="function")
-def pages(driver):
-    return AllPages(driver)
+def pages(driver, logger):
+    return AllPages(driver, logger)
 
 @pytest.fixture(scope="function")
 def logger(request):
@@ -153,6 +153,17 @@ def device_logs(request, service_logger):
             os.killpg(os.getpgid(process.pid), signal.SIGTERM)
         process.wait()
         service_logger.info(f"✅ Логирование завершено. Лог сохранён в {log_file}")
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                log_content = f.read()
+                allure.attach(
+                    name="Логи устройства (logcat)",
+                    body=log_content,
+                    attachment_type=allure.attachment_type.TEXT
+                )
+        except Exception as e:
+            service_logger.error(f"❌ Не удалось прикрепить логи к Allure: {e}")
+
     except Exception as e:
         service_logger.error(f"❌ Ошибка при остановке logcat процесса: {e}")
 

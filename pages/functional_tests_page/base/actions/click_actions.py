@@ -14,3 +14,10 @@ class ClickActions:
 
     def is_visible(self, by_locator):
         return self.wait_for_element(by_locator).is_displayed()
+
+    def safe_click(self, by_locator):
+        """Ожидание видимости элемента и клик по нему"""
+        element = self.is_visible(by_locator)
+        if element:
+            self.click(by_locator)
+        return element
