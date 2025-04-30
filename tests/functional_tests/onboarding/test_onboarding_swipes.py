@@ -117,8 +117,8 @@ def test_add_language_swipe_navigation(pages, logger):
                 wait_locator=onboarding.swipes.SCREEN_5["locator"],
                 first_screen=onboarding.swipes.SCREEN_6["locator"],
                 speed="fast"
-            ), "Не удалось вернуться на экран 5"
-            logger.info("Успешно вернулись на экран 5 с помощью свайпа влево")
+            ), "Не удалось вернуться на экран"
+            logger.info("Успешно вернулись на экран с помощью свайпа влево")
 
             logger.debug("Кликаем на 'Add Language' для обратного перехода на экран добавления языка")
             onboarding.buttons.clicks.click(onboarding.buttons.ADD_LANGUAGE_ITEM)
