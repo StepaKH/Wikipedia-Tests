@@ -59,43 +59,6 @@ def test_full_onboarding_swipe_navigation(pages, logger):
 **Тест для проверки навигации по вкладке "Add or edit language":**
 """)
 def test_add_language_swipe_navigation(pages, logger):
-    try:
-        onboarding = pages.onboarding
-        onboarding.buttons.clicks.click(onboarding.buttons.ADD_LANGUAGE_BTN)
-        onboarding.buttons.clicks.click(onboarding.buttons.ADD_LANGUAGE_ITEM)
-        assert onboarding.swipes.swipes.swipe_left(
-            wait_locator=onboarding.swipes.SCREEN_5["locator"],
-            first_screen=onboarding.swipes.SCREEN_6["locator"],
-            speed="fast"
-        ), f"Не удалось вернуться на экран"
-
-        onboarding.buttons.clicks.click(onboarding.buttons.ADD_LANGUAGE_ITEM)
-        assert onboarding.swipes.swipes.swipe_right(
-            wait_locator=onboarding.swipes.SCREEN_5["locator"],
-            first_screen=onboarding.swipes.SCREEN_6["locator"],
-            speed="fast"
-        ), f"Не удалось вернуться на экран"
-
-        assert onboarding.swipes.swipes.swipe_left(
-            wait_locator=onboarding.swipes.SCREEN_7["locator"],
-            first_screen=onboarding.swipes.SCREEN_5["locator"],
-            speed="fast"
-        ), f"Не удалось вернуться на экран"
-
-        onboarding.buttons.clicks.click(onboarding.buttons.ADD_LANGUAGE_BTN)
-        assert onboarding.swipes.swipes.swipe_right(
-            onboarding.swipes.SCREEN_7["locator"],
-            first_screen=onboarding.swipes.SCREEN_5["locator"],
-            speed="fast"
-        ), f"Не удалось вернуться на экран"
-    except Exception as e:
-        raise
-
-@pytest.mark.onboarding
-@allure.description("""
-**Тест для проверки навигации по вкладке "Add or edit language":**
-""")
-def test_add_language_swipe_navigation(pages, logger):
     """Проверка свайпов на экранах добавления и редактирования языка"""
     try:
         onboarding = pages.onboarding

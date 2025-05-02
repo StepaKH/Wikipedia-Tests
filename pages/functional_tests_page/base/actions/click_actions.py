@@ -21,3 +21,18 @@ class ClickActions:
         if element:
             self.click(by_locator)
         return element
+
+    def long_press(self, by_locator, duration=2000):
+        """Долгое нажатие на элемент (по умолчанию 2 секунды)"""
+        element = self.wait_for_element(by_locator)
+        self.driver.tap_and_hold(element, duration)
+
+    def drag_and_drop_elm(self, source_locator, target_locator):
+        """Перетаскивание одного элемента на другой"""
+        source = self.wait_for_element(source_locator)
+        target = self.wait_for_element(target_locator)
+
+        self.driver.drag_and_drop(source, target)
+
+        self.wait_for_element(source_locator)
+        self.wait_for_element(target_locator)
