@@ -1,5 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from pages.functional_tests_page.base.base_page import BasePage
+from selenium.webdriver.support.ui import WebDriverWait
 import random
 
 class LanguageActions(BasePage):
@@ -74,10 +75,6 @@ class LanguageActions(BasePage):
 
             if click_fact:
                 chosen.click()
-            else:
-                if not self.clicks.safe_click(self.BACK_BTN):
-                    self.log("warning", f"⚠️ Не удалось открыть поле поиска")
-                    return None
 
             self.log('info', f"✅ Язык выбран: {language_name}")
             return language_name
@@ -116,16 +113,30 @@ class LanguageActions(BasePage):
         """
         Возвращает список языков, отображаемых на экране
         """
+        self.clicks.wait_for_element(self.FIND_LANGUAGE_TITLE)
         elements = self.driver.find_elements(*self.FIND_LANGUAGE_TITLE)
         names = [el.text.strip() for el in elements if el.text.strip()]
         return names
 
-    def move_language_to_bottom(self, language_name):
+    def wait_language(self, language_name):
+        wait_lang = (
+            AppiumBy.XPATH,
+            f'//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/wiki_language_title" and @text="{language_name}"]'
+        )
+        self.clicks.wait_for_element(wait_lang)
+
+    def move_language_to_bottom(self, language_name, new_language=None):
         """
         Перемещает язык с заданным названием в самый низ списка
         """
         try:
             self.log("debug", "Получаем текущий список языков")
+            self.wait_language(language_name)
+            if new_language:
+                WebDriverWait(self.driver, 5).until(
+                    lambda d: self.get_language_names()[-2] != 'English'
+                    and self.get_language_names()[-2] != 'Русский'
+                )
             languages = self.get_language_names()
             if not languages:
                 self.log("warning", "⚠️ Список языков пуст или не получен")
@@ -154,6 +165,9 @@ class LanguageActions(BasePage):
 
             self.log("debug", f"🔄 Перетаскиваем '{language_name}' с позиции {index_from} на {index_to}")
             self.driver.drag_and_drop(source, target)
+            WebDriverWait(self.driver, 5).until(
+                lambda d: self.get_language_names()[-2] == language_name
+            )
 
             return True
 

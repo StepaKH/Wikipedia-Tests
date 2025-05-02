@@ -42,35 +42,32 @@ def test_random_add_language(open_language_edit_screen, logger):
 @pytest.mark.language
 @pytest.mark.smoke
 @allure.description("Тест: добавление языка через поиск")
-def test_add_language(open_language_edit_screen, logger):
+def test_add_language(open_language_edit_screen, logger, language_to_add=None):
     """
     Тест на добавление нового языка через поиск
     """
     try:
         lang_actions = open_language_edit_screen
 
-        with allure.step("1. Выбираем случайный язык для поиска"):
+        with allure.step("Открываем экран добавления языка"):
             logger.debug("Проверяем видимость кнопки 'Add languages'")
             assert lang_actions.clicks.safe_click(lang_actions.ADD_LANGUAGE_TITLE)
             logger.info("Кнопка 'Add languages' найдена и нажата")
 
-            logger.debug("Выбираем случайный язык из списка")
-            language_to_add = lang_actions.choose_random_language(max_scrolls=3, click_fact=None)
-            assert language_to_add is not None, "❌ Не удалось выбрать язык из списка"
-            logger.info(f"Случайный язык выбран для поиска: {language_to_add}")
+        if language_to_add is None:
+            with allure.step("Выбираем случайный язык для поиска"):
+                logger.debug("Выбираем случайный язык из списка")
+                language_to_add = lang_actions.choose_random_language(max_scrolls=3, click_fact=None)
+                assert language_to_add is not None, "❌ Не удалось выбрать язык из списка"
+                logger.info(f"Случайный язык выбран для поиска: {language_to_add}")
 
-        with allure.step("2. Открываем экран добавления языка"):
-            logger.debug("Проверяем видимость кнопки 'Add languages'")
-            assert lang_actions.clicks.safe_click(lang_actions.ADD_LANGUAGE_TITLE)
-            logger.info("Кнопка 'Add languages' найдена и нажата")
-
-        with allure.step("3. Добавление языка через поиск"):
+        with allure.step("Добавление языка через поиск"):
             logger.debug(f"Ищем язык '{language_to_add}' через поиск")
             added = lang_actions.add_language_via_search(language_to_add)
             assert added, "❌ Не удалось добавить язык через поиск"
             logger.info(f"Язык '{language_to_add}' успешно добавлен через поиск")
 
-        with allure.step("4. Проверка, что язык отображается в списке"):
+        with allure.step("Проверка, что язык отображается в списке"):
             logger.debug(f"Проверяем видимость языка '{language_to_add}' в списке")
             assert lang_actions.clicks.is_visible(lang_actions.language_by_name(language_to_add)), \
                 f"Язык '{language_to_add}' не отображается в списке"
@@ -90,26 +87,26 @@ def test_add_language(open_language_edit_screen, logger):
 @pytest.mark.language
 @pytest.mark.smoke
 @allure.description("Тест проверяет корректность перемещения языка в конец списка с помощью drag-and-drop.")
-def test_drag_language_to_bottom(open_language_edit_screen, logger):
+def test_drag_language_to_bottom(open_language_edit_screen, logger, new_language=None):
     """Тест на перемещение языка в конец списка"""
     try:
         lang_page = open_language_edit_screen
         logger.info("=== Тест: перемещение языка вниз списка ===")
 
-        with allure.step("1. Получаем текущий список языков"):
+        with allure.step("Получаем текущий список языков"):
             logger.debug("Получаем список отображаемых языков")
             languages = lang_page.get_language_names()
             assert languages, "❌ Список языков пуст"
             logger.info(f"Текущий список языков: {languages}")
 
-        with allure.step("2. Перемещаем первый язык в конец списка"):
+        with allure.step("Перемещаем первый язык в конец списка"):
             language_to_move = languages[0]
             logger.debug(f"Пробуем переместить язык '{language_to_move}' вниз списка")
-            result = lang_page.move_language_to_bottom(language_to_move)
+            result = lang_page.move_language_to_bottom(language_to_move, new_language=new_language)
             assert result, f"❌ Не удалось переместить язык '{language_to_move}' вниз"
             logger.info(f"✅ Язык '{language_to_move}' успешно перемещён вниз")
 
-        with allure.step("3. Проверка, что язык оказался внизу"):
+        with allure.step("Проверка, что язык оказался внизу"):
             updated_languages = lang_page.get_language_names()
             assert updated_languages[-2] == language_to_move, \
                 f"❌ Язык '{language_to_move}' не оказался внизу (ожидался на последней позиции)"
@@ -126,4 +123,53 @@ def test_drag_language_to_bottom(open_language_edit_screen, logger):
         )
         raise
 
-##Добавить: Повторный поиск языка; Перетаскивание языка, после добавлния нового
+@pytest.mark.language
+@pytest.mark.smoke
+@allure.description("Тест проверяет корректность перемещения языка в конец списка с помощью drag-and-drop после добавления нового языка в список.")
+def test_drag_language_after_add(open_language_edit_screen, logger):
+    try:
+        logger.info("=== Тест: перемещение языка вниз списка после добавления нового===")
+
+        test_random_add_language(open_language_edit_screen, logger)
+
+        test_drag_language_to_bottom(open_language_edit_screen, logger, new_language=True)
+
+    except Exception as e:
+        logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
+        allure.attach(
+            name="Ошибка теста",
+            body=str(e),
+            attachment_type=allure.attachment_type.TEXT
+        )
+        raise
+
+@pytest.mark.language
+@pytest.mark.smoke
+@allure.description("Тест проверяет повторное добавление одного и того же языка через поле поиска.")
+def test_re_adding_language_search_bar(open_language_edit_screen, logger):
+    try:
+        lang_actions = open_language_edit_screen
+        logger.info("=== Тест: повторное добавление языка через строку поиска===")
+
+        with allure.step("Выбираем случайный язык для поиска"):
+            logger.debug("Проверяем видимость кнопки 'Add languages'")
+            assert lang_actions.clicks.safe_click(lang_actions.ADD_LANGUAGE_TITLE)
+            logger.info("Кнопка 'Add languages' найдена и нажата")
+
+            logger.debug("Выбираем случайный язык из списка")
+            language_to_add = lang_actions.choose_random_language(max_scrolls=3, click_fact=None)
+            assert language_to_add is not None, "❌ Не удалось выбрать язык из списка"
+            logger.info(f"Случайный язык выбран для поиска: {language_to_add}")
+
+        lang_actions.clicks.safe_click(lang_actions.BACK_BTN)
+        test_add_language(open_language_edit_screen, logger, language_to_add)
+        test_add_language(open_language_edit_screen, logger, language_to_add)
+
+    except Exception as e:
+        logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
+        allure.attach(
+            name="Ошибка теста",
+            body=str(e),
+            attachment_type=allure.attachment_type.TEXT
+        )
+        raise
