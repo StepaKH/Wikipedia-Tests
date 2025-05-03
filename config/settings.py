@@ -25,8 +25,4 @@ class Config:
         "main": "org.wikipedia.main.MainActivity",
         "search": "org.wikipedia.search.SearchActivity",
         "page": "org.wikipedia.page.PageActivity",
-        "settings": "org.wikipedia.settings.SettingsActivity",
-        "reading_list": "org.wikipedia.readinglist.ReadingListActivity",
-        "about": "org.wikipedia.about.AboutActivity",
-        "test": "leakcanary.internal.activity.LeakActivity",
     }

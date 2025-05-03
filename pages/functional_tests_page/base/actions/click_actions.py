@@ -20,5 +20,25 @@ class ClickActions:
         element = self.is_visible(by_locator)
         if element:
             self.click(by_locator)
-
         return element
+
+    def long_press(self, by_locator, duration=2000):
+        """Долгое нажатие на элемент (по умолчанию 2 секунды)"""
+        try:
+            self.driver.execute_script('mobile: longClickGesture', {
+                'elementId': by_locator.id,
+                'duration': duration
+            })
+            return True
+        except Exception as e:
+            return False
+
+    def drag_and_drop_elm(self, source_locator, target_locator):
+        """Перетаскивание одного элемента на другой"""
+        source = self.wait_for_element(source_locator)
+        target = self.wait_for_element(target_locator)
+
+        self.driver.drag_and_drop(source, target)
+
+        self.wait_for_element(source_locator)
+        self.wait_for_element(target_locator)
