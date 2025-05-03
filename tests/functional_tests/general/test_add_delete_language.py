@@ -97,7 +97,11 @@ def test_drag_language_to_bottom(open_language_edit_screen, logger, new_language
             logger.debug("Получаем список отображаемых языков")
             languages = lang_page.get_language_names()
             assert languages, "❌ Список языков пуст"
-            logger.info(f"Текущий список языков: {languages}")
+
+            logger.debug("Проверка на необходимое количество языков в списке для перемещения")
+            assert len(languages) >= 3, 'Недостаточно языков для перемещения'
+
+            logger.info(f"Текущий список языков: {languages[:-1]}")
 
         with allure.step("Перемещаем первый язык в конец списка"):
             language_to_move = languages[0]
@@ -172,4 +176,50 @@ def test_re_adding_language_search_bar(open_language_edit_screen, logger):
             body=str(e),
             attachment_type=allure.attachment_type.TEXT
         )
+        raise
+
+@pytest.mark.language
+@pytest.mark.smoke
+@allure.description("Удаление случайного языка через долгое нажатие")
+def test_delete_random_language_by_long_press(open_language_edit_screen, logger):
+    try:
+        lang_page = open_language_edit_screen
+        logger.info("=== Тест: удаление случайного языка через долгое нажатие ===")
+
+        with allure.step("Удаляем язык через long press"):
+            deleted = lang_page.remove_random_language_by_long_press()
+            assert deleted, "❌ Не удалось удалить язык через долгое нажатие"
+
+        with allure.step("Проверка, что язык удалён"):
+            updated_languages = lang_page.get_language_names()
+            assert deleted not in updated_languages, \
+                f"❌ Язык '{deleted}' всё ещё присутствует в списке после удаления"
+            logger.info(f"✅ Язык '{deleted}' больше не отображается в списке")
+
+    except Exception as e:
+        logger.error(f"!!! Ошибка: {e}")
+        allure.attach(name="Ошибка", body=str(e), attachment_type=allure.attachment_type.TEXT)
+        raise
+
+@pytest.mark.language
+@pytest.mark.smoke
+@allure.description("Удаление случайного языка через меню")
+def test_delete_random_language_via_menu(open_language_edit_screen, logger):
+    try:
+        lang_page = open_language_edit_screen
+        logger.info("=== Тест: удаление случайного языка через меню ===")
+
+        with allure.step("Удаляем язык через меню"):
+            deleted = lang_page.remove_random_language_via_menu()
+            assert deleted, "❌ Не удалось удалить язык через меню"
+
+        with allure.step("Проверка, что язык удалён"):
+            updated_languages = lang_page.get_language_names()
+            assert deleted not in updated_languages, \
+                f"❌ Язык '{deleted}' всё ещё присутствует в списке после удаления"
+            logger.info(f"✅ Язык '{deleted}' больше не отображается в списке")
+
+    except Exception as e:
+        logger.error(f"!!! Ошибка: {e}")
+        allure.attach(name="Ошибка", body=str(e), attachment_type=allure.attachment_type.TEXT)
         raise

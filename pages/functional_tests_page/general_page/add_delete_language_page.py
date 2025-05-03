@@ -25,6 +25,8 @@ class LanguageActions(BasePage):
     # Кнопка "Remove language"
     REMOVE_LANGUAGE_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/content")
     FIND_LANGUAGE_TITLE = (AppiumBy.XPATH,'//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/wiki_language_title"]')
+    DELETE_BUTTOM = (AppiumBy.ACCESSIBILITY_ID, "Delete selected items")
+    OK_DELETE = (AppiumBy.ID, "android:id/button1")
 
     @staticmethod
     def language_by_name(name):
@@ -43,10 +45,6 @@ class LanguageActions(BasePage):
     def log(self, level, msg):
         if self.logger:
             getattr(self.logger, level)(msg)
-
-    # Элемент для long press
-    def long_press_language(self, name):
-        return (AppiumBy.XPATH, f"//android.widget.TextView[@text='{name}']")
 
     def choose_random_language(self, max_scrolls=20, click_fact=True):
         """
@@ -173,4 +171,86 @@ class LanguageActions(BasePage):
 
         except Exception as e:
             self.log("error", f"❌ Ошибка при перемещении языка: {e}")
+            return False
+
+    def remove_random_language_by_long_press(self):
+        try:
+            self.log("debug", "Получаем текущий список языков")
+            languages = self.get_language_names()
+            if len(languages) <= 1:
+                self.log("warning", "⚠️ Недостаточно языков для удаления")
+                return False
+
+            language_name = random.choice(languages[:-1])
+            self.log("info", f"🎯 Выбран язык для удаления: '{language_name}'")
+
+            self.wait_language(language_name)
+            self.log("debug", "Ищем элемент выбранного языка")
+            element = self.driver.find_element(*self.language_by_name(language_name))
+
+            self.log("debug", f"Выполняем долгое нажатие на язык '{language_name}'")
+            if not self.clicks.long_press(element):
+                self.log("warning", "⚠️ Не удалось выполнить долгое нажатие")
+                return False
+            self.log("info", f"✅ Долгое нажатие выполнено для языка '{language_name}'")
+
+            self.log("debug", "Подтверждаем удаление языка")
+            if not self.clicks.safe_click(self.DELETE_BUTTOM):
+                self.log("warning", "⚠️ Не удалось нажать кнопку удаления")
+                return False
+            if not self.clicks.safe_click(self.OK_DELETE):
+                self.log("warning", "⚠️ Не удалось подтвердить удаление")
+                return False
+
+            self.log("info", f"🗑️ Язык '{language_name}' успешно удалён")
+
+            return language_name
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при удалении языка через long press: {e}")
+            return False
+
+    def remove_random_language_via_menu(self):
+        try:
+            self.log("debug", "Получаем текущий список языков")
+            languages = self.get_language_names()
+            if len(languages) <= 1:
+                self.log("warning", "⚠️ Недостаточно языков для удаления")
+                return False
+
+            language_name = random.choice(languages[:-1])
+            self.log("info", f"🎯 Выбран язык для удаления через меню: '{language_name}'")
+
+            self.log("debug", "Открываем меню (три точки)")
+            if not self.clicks.safe_click(self.MENU_BTN):
+                self.log("warning", "⚠️ Не удалось открыть меню")
+                return False
+
+            self.log("debug", "Нажимаем 'Remove language'")
+            if not self.clicks.safe_click(self.REMOVE_LANGUAGE_BTN):
+                self.log("warning", "⚠️ Не удалось нажать 'Remove language'")
+                return False
+
+            self.log("debug", f"Выбираем язык '{language_name}' для удаления")
+            checkbox_locator = self.language_by_name(language_name)
+            if not self.clicks.safe_click(checkbox_locator):
+                self.log("warning", f"⚠️ Не удалось выбрать язык '{language_name}'")
+                return False
+
+            self.log("debug", "Нажимаем на кнопку удаления")
+            if not self.clicks.safe_click(self.DELETE_BUTTOM):
+                self.log("warning", "⚠️ Не удалось нажать кнопку удаления")
+                return False
+
+            self.log("debug", "Подтверждаем удаление")
+            if not self.clicks.safe_click(self.OK_DELETE):
+                self.log("warning", "⚠️ Не удалось подтвердить удаление")
+                return False
+
+            self.log("info", f"🗑️ Язык '{language_name}' успешно удалён через меню")
+
+            return language_name
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при удалении языка через меню: {e}")
             return False
