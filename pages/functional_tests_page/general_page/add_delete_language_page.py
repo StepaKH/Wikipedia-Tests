@@ -100,7 +100,6 @@ class LanguageActions(BasePage):
                 self.log("warning", f"⚠️ Язык '{language_name}' не найден в результатах поиска")
                 return False
 
-            self.log("info", f"✅ Язык '{language_name}' добавлен через поиск")
             return language_name
 
         except Exception as e:
