@@ -6,7 +6,6 @@ class Config:
     # Адрес Appium-сервера
     APPIUM_SERVER_URL = "http://localhost:4723"
 
-    # Путь к APK-файлу
     PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     APP_PATH = os.path.join(PROJECT_ROOT, "apk", "app-alpha-debug.apk")
 
