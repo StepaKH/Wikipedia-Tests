@@ -6,6 +6,7 @@ class Config:
     # Адрес Appium-сервера
     APPIUM_SERVER_URL = "http://localhost:4723"
 
+    # Путь к APK-файлу
     PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     APP_PATH = os.path.join(PROJECT_ROOT, "apk", "app-alpha-debug.apk")
 
@@ -25,8 +26,4 @@ class Config:
         "main": "org.wikipedia.main.MainActivity",
         "search": "org.wikipedia.search.SearchActivity",
         "page": "org.wikipedia.page.PageActivity",
-        "settings": "org.wikipedia.settings.SettingsActivity",
-        "reading_list": "org.wikipedia.readinglist.ReadingListActivity",
-        "about": "org.wikipedia.about.AboutActivity",
-        "test": "leakcanary.internal.activity.LeakActivity",
     }
