@@ -5,6 +5,8 @@ import allure
 import platform
 import os
 import logging
+import time
+from pathlib import Path
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.all_pages import AllPages
@@ -201,9 +203,9 @@ def skip_onboarding(pages, logger):
 
     with allure.step("⏭️ Пропуск онбординга"):
         try:
-            for _ in range(3):
+            for i in range(3):
                 if saved.clicks.safe_click(saved.CONTINUE_BTN):
-                    logger.debug("Пропущен экран онбординга")
+                    logger.debug(f"Пропущен экран онбординга {i + 1}")
                 else:
                     break
 
