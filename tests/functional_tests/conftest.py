@@ -193,3 +193,97 @@ def pytest_runtest_makereport(item, call):
 def pytest_configure(config):
     """Конфигурация pytest для сохранения Allure-отчетов"""
     config.option.allure_report_dir = _ALLURE_DIR
+
+@pytest.fixture(scope="function")
+def skip_onboarding(pages, logger):
+    """Пропускает экраны онбординга, если они появляются"""
+    saved = pages.saved
+
+    with allure.step("⏭️ Пропуск онбординга"):
+        try:
+            for _ in range(3):
+                if saved.clicks.safe_click(saved.CONTINUE_BTN):
+                    logger.debug("Пропущен экран онбординга")
+                else:
+                    break
+
+            if saved.clicks.safe_click(saved.GET_STARTED_BTN):
+                logger.info("Онбординг успешно пропущен")
+            else:
+                logger.debug("Экран онбординга не обнаружен")
+
+        except Exception as e:
+            logger.warning(f"Ошибка при пропуске онбординга: {str(e)}")
+            allure.attach(
+                name="Ошибка пропуска онбординга",
+                body=str(e),
+                attachment_type=allure.attachment_type.TEXT
+            )
+
+    return pages
+
+@pytest.fixture(scope="function")
+def log_in(logger, skip_onboarding):
+    """Выполняет вход в аккаунт с обработкой разрешений"""
+    saved = skip_onboarding.saved
+
+    try:
+        with allure.step(f"Авторизация пользователя"):
+            with allure.step("Переход в раздел 'Saved'"):
+                saved.clicks.safe_click(saved.SAVED_BTN)
+
+            with allure.step("Открытие экрана авторизации"):
+                saved.clicks.safe_click(saved.POSITIVE_BTN)
+                saved.clicks.safe_click(saved.CREATE_ACCOUNT_LOGIN_BUTTON_BTN)
+
+            with allure.step("Ввод учетных данных"):
+                assert saved.log_in_to_account(), "Не удалось ввести логин/пароль"
+                saved.clicks.safe_click(saved.LOGIN_BUTTON_BTN)
+
+            with allure.step("Нажатие кнопки 'Dont allow'"):
+                logger.debug("Ищем кнопку 'Dont allow'")
+                assert saved.clicks.safe_click(saved.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
+                logger.info("Кнопка 'Dont allow' найдена и нажата")
+
+            logger.info("Успешная авторизация")
+            yield saved
+
+    except Exception as e:
+        logger.error(f"Ошибка авторизации: {str(e)}")
+        allure.attach(
+            name="Ошибка авторизации",
+            body=str(e),
+            attachment_type=allure.attachment_type.TEXT
+        )
+        pytest.fail(f"Тест прерван - не удалось выполнить вход: {str(e)}")
+
+@pytest.fixture(scope="function")
+def log_out(request, logger, pages):
+    """Выполняет выход из аккаунта"""
+    def fin():
+        saved = pages.saved
+
+        try:
+            with allure.step("🚪 Выход из аккаунта"):
+                assert saved.clicks.safe_click(saved.MORE_BTN), "❌ Нет кнопки 'More'"
+                assert saved.clicks.safe_click(saved.SETTINGS_TV), "❌ Нет кнопки 'Settings'"
+
+                for _ in range(3):
+                    saved.swipes.swipe_up()
+
+                assert saved.clicks.safe_click(saved.LOGOUT_BUTTON_BTN), "❌ Нет кнопки 'Log out'"
+                assert saved.clicks.safe_click(saved.BUTTON1_BTN), "❌ Подтверждение 'Log out' не найдено"
+
+                assert saved.clicks.is_visible(saved.SAVED_BTN), "❌ Не вышли из аккаунта"
+                logger.info("✅ Аккаунт успешно разлогинен")
+
+        except Exception as e:
+            logger.error(f"Ошибка при выходе: {str(e)}")
+            allure.attach(
+                name="Ошибка выхода",
+                body=str(e),
+                attachment_type=allure.attachment_type.TEXT
+            )
+            raise
+
+    request.addfinalizer(fin)
