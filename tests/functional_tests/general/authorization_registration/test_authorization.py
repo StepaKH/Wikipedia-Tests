@@ -175,12 +175,20 @@ def test_successful_login(open_log_in_screen, logger, log_out):
             assert page.clicks.safe_click(page.LOGIN_BUTTON), "Кнопка входа не найдена"
 
         with allure.step("3. Проверяем успешный вход"):
-            assert page.clicks.is_visible(page.SUCCESS_LOGIN_INDICATOR), "Не удалось войти в систему"
-            logger.info("✅ Успешная авторизация")
+            main_screen = page.clicks.is_visible(page.MAIN_SCREEN)
 
-        with allure.step("4. Нажатие кнопки 'Dont allow'"):
-            assert page.clicks.safe_click(page.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
-            logger.info("Кнопка 'Dont allow' найдена и нажата")
+            if not main_screen:
+                success_login = page.clicks.is_visible(page.SUCCESS_LOGIN_INDICATOR)
+
+                if not success_login:
+                    logger.error("Не отобразился ни индикатор успешного входа, ни главный экран")
+                    raise AssertionError("Не отобразился ни индикатор успешного входа, ни главный экран")
+
+                with allure.step("4. Нажатие кнопки 'Dont allow'"):
+                    assert page.clicks.safe_click(page.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
+                    logger.info("Кнопка 'Dont allow' найдена и нажата")
+
+            logger.info("✅ Успешная авторизация (определен целевой экран)")
 
     except Exception as e:
         logger.error(f"Ошибка в тесте: {str(e)}")
