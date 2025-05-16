@@ -4,7 +4,6 @@ import pytest
 import allure
 import platform
 import os
-import time
 import logging
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
@@ -197,92 +196,94 @@ def pytest_configure(config):
 
 @pytest.fixture(scope="function")
 def skip_onboarding(pages, logger):
+    """Пропускает экраны онбординга, если они появляются"""
     saved = pages.saved
 
     with allure.step("⏭️ Пропуск онбординга"):
         try:
             for i in range(3):
-                logger.debug(f"Пропускаем экран {i + 1}")
-                saved.clicks.safe_click(saved.CONTINUE_BTN)
+                if saved.clicks.safe_click(saved.CONTINUE_BTN):
+                    logger.debug(f"Пропущен экран онбординга {i + 1}")
+                else:
+                    break
 
-            saved.clicks.safe_click(saved.GET_STARTED_BTN)
-            logger.debug("Нажата кнопка 'Get Started'")
+            if saved.clicks.safe_click(saved.GET_STARTED_BTN):
+                logger.info("Онбординг успешно пропущен")
+            else:
+                logger.debug("Экран онбординга не обнаружен")
 
         except Exception as e:
-            logger.warning(f"Онбординг не был полностью показан или уже пропущен: {str(e)}")
+            logger.warning(f"Ошибка при пропуске онбординга: {str(e)}")
+            allure.attach(
+                name="Ошибка пропуска онбординга",
+                body=str(e),
+                attachment_type=allure.attachment_type.TEXT
+            )
 
     return pages
 
 @pytest.fixture(scope="function")
 def log_in(logger, skip_onboarding):
+    """Выполняет вход в аккаунт с обработкой разрешений"""
     saved = skip_onboarding.saved
 
     try:
-        with allure.step("1. Нажатие кнопки 'saved'"):
-            assert saved.clicks.safe_click(saved.SAVED_BTN), "Кнопка 'saved' не найдена"
-            logger.info("Кнопка 'saved' нажата")
+        with allure.step(f"Авторизация пользователя"):
+            with allure.step("Переход в раздел 'Saved'"):
+                saved.clicks.safe_click(saved.SAVED_BTN)
 
-        with allure.step("2. Нажатие кнопки 'Log_in/join'"):
-            logger.debug("Ищем кнопку 'Log_in/join'")
-            assert saved.clicks.safe_click(saved.POSITIVE_BTN), "Кнопка 'Log_in/join' не найдена"
-            logger.info("Кнопка 'Log_in/join' найдена и нажата")
+            with allure.step("Открытие экрана авторизации"):
+                saved.clicks.safe_click(saved.POSITIVE_BTN)
+                saved.clicks.safe_click(saved.CREATE_ACCOUNT_LOGIN_BUTTON_BTN)
 
-        with allure.step("3. Нажатие кнопки 'Log_in'"):
-            logger.debug("Ищем кнопку 'Log_in'")
-            assert saved.clicks.safe_click(saved.CREATE_ACCOUNT_LOGIN_BUTTON_BTN), "Кнопка 'Log_in' не найдена"
-            logger.info("Кнопка 'Log_in' найдена и нажата")
+            with allure.step("Ввод учетных данных"):
+                assert saved.log_in_to_account(), "Не удалось ввести логин/пароль"
+                saved.clicks.safe_click(saved.LOGIN_BUTTON_BTN)
 
-        with allure.step("4. Ввод логина и пароля"):
-            assert saved.log_in_to_account(), "Не удалось ввести логин и пароль"
+            with allure.step("Нажатие кнопки 'Dont allow'"):
+                logger.debug("Ищем кнопку 'Dont allow'")
+                assert saved.clicks.safe_click(saved.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
+                logger.info("Кнопка 'Dont allow' найдена и нажата")
 
-        with allure.step("5. Завершение логина"):
-            logger.debug("Ищем итоговую кнопку 'Log_in'")
-            assert saved.clicks.safe_click(saved.LOGIN_BUTTON_BTN), "Итоговая кнопка 'Log_in' не найдена"
-            logger.info("Итоговая кнопка 'Log_in' найдена и нажата")
-
-        with allure.step("6. Нажатие кнопки 'Dont allow'"):
-            logger.debug("Ищем кнопку 'Dont allow'")
-            assert saved.clicks.safe_click(saved.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
-            logger.info("Кнопка 'Dont allow' найдена и нажата")
-            logger.info("Аккаунт залогинен")
-
-        return saved
+            logger.info("Успешная авторизация")
+            yield saved
 
     except Exception as e:
-        logger.warning(f"Не удалось войти в аккаунт: {str(e)}")
+        logger.error(f"Ошибка авторизации: {str(e)}")
+        allure.attach(
+            name="Ошибка авторизации",
+            body=str(e),
+            attachment_type=allure.attachment_type.TEXT
+        )
+        pytest.fail(f"Тест прерван - не удалось выполнить вход: {str(e)}")
 
 @pytest.fixture(scope="function")
-def log_out(logger, pages):
-    saved = pages.saved
+def log_out(request, logger, pages):
+    """Выполняет выход из аккаунта"""
+    def fin():
+        saved = pages.saved
 
-    try:
-        with allure.step("1. Нажатие кнопки 'More'"):
-            logger.debug("Ищем кнопку 'More'")
-            assert saved.clicks.safe_click(saved.MORE_BTN), "Кнопка 'More' не найдена"
-            logger.info("Кнопка 'More' найдена и нажата")
+        try:
+            with allure.step("🚪 Выход из аккаунта"):
+                assert saved.clicks.safe_click(saved.MORE_BTN), "❌ Нет кнопки 'More'"
+                assert saved.clicks.safe_click(saved.SETTINGS_TV), "❌ Нет кнопки 'Settings'"
 
-        with allure.step("2. Нажатие кнопки 'Settings'"):
-            logger.debug("Ищем кнопку 'Settings'")
-            assert saved.clicks.safe_click(saved.SETTINGS_TV), "Кнопка 'Settings' не найдена"
-            logger.info("Кнопка 'Settings' найдена и нажата")
+                for _ in range(3):
+                    saved.swipes.swipe_up()
 
-        with allure.step("3. 2 скрола вниз"):
-            for i in range(2):
-                logger.debug(f"Скролим {i + 1}")
-                saved.swipes.swipe_up()
+                assert saved.clicks.safe_click(saved.LOGOUT_BUTTON_BTN), "❌ Нет кнопки 'Log out'"
+                assert saved.clicks.safe_click(saved.BUTTON1_BTN), "❌ Подтверждение 'Log out' не найдено"
 
-        with allure.step("4. Нажатие кнопки 'Log out'"):
-            logger.debug("Ищем кнопку 'Log out'")
-            assert saved.clicks.safe_click(saved.LOGOUT_BUTTON_BTN), "Кнопка 'Log out' не найдена"
-            logger.info("Кнопка 'Log out' найдена и нажата")
+                assert saved.clicks.is_visible(saved.SAVED_BTN), "❌ Не вышли из аккаунта"
+                logger.info("✅ Аккаунт успешно разлогинен")
 
-        with allure.step("5. Нажатие повторной кнопки 'Log out'"):
-            logger.debug("Ищем кнопку 'Log out'")
-            assert saved.clicks.safe_click(saved.BUTTON1_BTN), "Повторная кнопка 'Log out' не найдена"
-            logger.info("Повторная кнопка 'Log out' найдена и нажата")
+        except Exception as e:
+            logger.error(f"Ошибка при выходе: {str(e)}")
+            allure.attach(
+                name="Ошибка выхода",
+                body=str(e),
+                attachment_type=allure.attachment_type.TEXT
+            )
+            raise
 
-            assert saved.clicks.is_visible(saved.SAVED_BTN), "Аккаунт не разлогинен"
-            logger.info("Аккаунт разлогинен")
-
-    except Exception as e:
-        logger.warning(f"Не удалось войти в аккаунт: {str(e)}")
+    request.addfinalizer(fin)
