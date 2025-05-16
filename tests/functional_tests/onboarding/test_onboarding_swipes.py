@@ -54,6 +54,7 @@ def test_full_onboarding_swipe_navigation(pages, logger):
         raise
 
 @pytest.mark.onboarding
+@pytest.mark.smoke
 @allure.description("""
 **Тест для проверки навигации по вкладке "Add or edit language":**
 """)

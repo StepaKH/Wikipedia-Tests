@@ -5,6 +5,8 @@ import allure
 import platform
 import os
 import logging
+import time
+from pathlib import Path
 from appium.webdriver.appium_service import AppiumService
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.all_pages import AllPages
