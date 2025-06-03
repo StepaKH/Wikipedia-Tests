@@ -29,7 +29,6 @@ class SavedPage(BasePage):
     NOTIFICATIONS_BTN = (AppiumBy.XPATH, "//android.widget.FrameLayout[@content-desc='Notifications']")
     ALL_NTF_BTN = (AppiumBy.XPATH, "//android.widget.TextView[contains(@text, 'All')]")
     MENTIONS_NTF_BTN = (AppiumBy.XPATH, "//android.widget.TextView[contains(@text, 'Mentions')]")
-    #NAVIGATE_UP_BTN = (AppiumBy.XPATH, "//android.widget.ImageButton[@content-desc='Navigate up']")
 
     #for skip_onboarding
     CONTINUE_BTN = (AppiumBy.ID, "org.wikipedia.alpha:id/fragment_onboarding_forward_button")
@@ -80,8 +79,6 @@ class SavedPage(BasePage):
     BLUETOOTH_TV = ( AppiumBy.XPATH, "//android.widget.TextView[@resource-id='android:id/text1' and @text='Bluetooth']")#swapdown
 
     #for delete list
-    #OK_BUTTON1_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button1']")
-    #CANCEL_BUTTON2_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button2']")
     SNACKBAR_TEXT_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/snackbar_text']")
 
     #for select
@@ -120,7 +117,7 @@ class SavedPage(BasePage):
             return False
 
     def log_in_to_account(self):
-        username = "leviofan2005"
+        username = "arr2005"
         password = "08.06.05"
 
         try:

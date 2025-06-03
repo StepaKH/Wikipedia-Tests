@@ -1,6 +1,7 @@
 import random
 import string
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.support.ui import WebDriverWait
 from pages.functional_tests_page.base.base_page import BasePage
 
 class ExplorePage(BasePage):
@@ -26,30 +27,20 @@ class ExplorePage(BasePage):
 
     #for search in search
     HISTORY_EMPTY_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@resource-id='org.wikipedia.alpha:id/history_empty_image']")
-    #CLEAR_HISTORY_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Clear history']")
-    #NO_BUTTON2_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button2']")
-    #YES_BUTTON1_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button1']")
-    #//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/page_list_item_title" and @text="GhGk-63"]
     FILTER_HISTORY_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Filter history']")
     DONE_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='Done']")
-    #SEARCH_SRC_TEXT_ACTV = (AppiumBy.XPATH, "//android.widget.AutoCompleteTextView[@resource-id='org.wikipedia.alpha:id/search_src_text']")
-    #//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/page_list_item_title" and @text="FHM's 100 Sexiest Women (UK)"]
     SEARCH_EMPTY_TEXT_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/search_empty_text']")
 
     #for tabs
     TABS_COUNT_TEXT_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/tabsCountText"]')
     NEW_TAB_BTN = (AppiumBy.XPATH, "//android.widget.ImageButton[@content-desc='New tab']")
     MORE_OPTIONS_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='More options']")
-    #//android.view.ViewGroup[@resource-id="org.wikipedia.alpha:id/tabContainer"]  [1,2,3...]
     NEW_TAB_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/title' and @text='New tab']")
     SAVE_ALL_TABS_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/title' and @text='Save all tabs']")
     EXPLORE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/title' and @text='Explore']")
 
     #for close tabs
     CLOSE_ALL_TABS_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/title' and @text='Close all tabs']")
-    #NO_BUTTON2_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button2']")
-    #YES_BUTTON1_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button1']")
-    #TAB_CLOSE_BTN_IV = (AppiumBy.XPATH, "(//android.widget.ImageView[@resource-id='org.wikipedia.alpha:id/tabCloseButton'])[1]")
 
     # for save new list
     TEXT_INPUT_ET = (AppiumBy.XPATH, "//android.widget.EditText[@resource-id='org.wikipedia.alpha:id/text_input']")
@@ -57,6 +48,65 @@ class ExplorePage(BasePage):
     CANCEL_BUTTON2_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button2']")
     OK_BUTTON1_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button1']")
 
+    #for share
+    PAGE_SHARE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_share']")
+    COPY_FL = (AppiumBy.XPATH, "//android.widget.FrameLayout[@content-desc='Copy']/android.widget.ImageView")
+
+    #for talk page
+    TALK_PAGE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_view_talk_page']")
+    NEW_TOPIC_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='org.wikipedia.alpha:id/talkNewTopicButton']")
+    GOT_IT_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='android:id/button1']")
+
+    #for page explore
+    PAGE_EXPLORE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_explore']")
+
+    #for new tab
+    PAGE_NEW_TAB_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_new_tab']")
+
+    #for theme
+    THEME_TV = (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='Theme']")
+    THEME_CHECK_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='org.wikipedia.alpha:id/button_font_family_sans_serif']")
+
+    #for categories
+    PAGE_CATEGORIES_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_categories']")
+    CATEGORIES_THUMBNAIL_TV = (AppiumBy.XPATH, "//android.widget.ImageView[@resource-id='org.wikipedia.alpha:id/categories_thumbnail']")
+
+    #for find in article
+    FIND_IN_ARTICLE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='Find in article']")
+    FIND_IN_PAGE_MATCH_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/find_in_page_match']")
+
+    #for save
+    SAVE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='Save']")
+    SAVED_LIST = ( AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/item_title']")
+    SAVE_GOT_IT = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='org.wikipedia.alpha:id/buttonView']")
+
+    #for edit article
+    PAGE_EDIT_ARTICLE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_edit_article']")
+    EDIT_ACTION_BUTTON_TEXT_BTN = (AppiumBy.XPATH, "//android.widget.Button[@resource-id='org.wikipedia.alpha:id/edit_actionbar_button_text']")
+
+    #for language
+    LANGUAGE_TV = (AppiumBy.XPATH, "//android.widget.TextView[@content-desc='Language']")
+    SEARCH_FOR_A_LANGUAGE_BTN = (AppiumBy.XPATH, "//android.widget.Button[@content-desc='Search for a language']")
+    LANGUAGE_TITLES = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/localized_language_name"]')
+
+    #for watch
+    PAGE_WATCH_TV = (AppiumBy.XPATH, "//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/page_watch']")
+    MORE_FL = (AppiumBy.XPATH, "//android.widget.FrameLayout[@content-desc='More']")
+    WATCHLIST_TV = (AppiumBy.XPATH, '//android.widget.TextView[@text="Watchlist"]')
+    SEARCH_OR_FILTER_WATCHLIST_TV = (AppiumBy.XPATH, '//android.widget.TextView[@text="Search or filter watchlist"]')
+
+    #for edit history
+    PAGE_VIEW_EDIT_HISTORY_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/page_view_edit_history"]')
+    COMPARE_BUTTON_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/compareButton"]')
+    SELECT_BUTTON1_IV = (AppiumBy.XPATH, '(//android.widget.ImageView[@resource-id="org.wikipedia.alpha:id/selectButton"])[1]')
+    SELECT_BUTTON2_IV = (AppiumBy.XPATH, '(//android.widget.ImageView[@resource-id="org.wikipedia.alpha:id/selectButton"])[2]')
+    COMPARE_CONFIRM_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/compareConfirmButton"]')
+
+    #for customize toolbar
+    CUSTOMIZE_TOOLBAR_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/customize_toolbar"]')
+    DRAG_ICONS = (AppiumBy.XPATH, '//android.widget.ImageView[@content-desc="Hold the drag icon to move the item"]')
+    SHARE_TV = (AppiumBy.XPATH, '//android.widget.TextView[@content-desc="Share"]')
+    PAGE_SAVE = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/page_save"]')
 
     def log(self, level, msg):
         if self.logger:
@@ -327,4 +377,102 @@ class ExplorePage(BasePage):
 
         except Exception as e:
             self.log("error", f"❌ Критическая ошибка при проврке текста: {str(e)}")
+            return False
+
+    def choose_random_language(self, max_scrolls=5, click_fact=True):
+        """
+        Выбор случайного языка из списка. Возвращает имя выбранного языка или None, если не удалось.
+        """
+        try:
+            scrolls = random.randint(0, max_scrolls)
+            self.log('info', f"🔁 Прокрутка вниз: {scrolls} раз")
+
+            for _ in range(scrolls):
+                self.swipes.swipe_up()
+
+            self.driver.implicitly_wait(2)
+            elements = self.driver.find_elements(*self.LANGUAGE_TITLES)
+
+            if not elements:
+                self.log('warning', "⚠️ Не найдено языков на экране.")
+                return None
+
+            chosen = random.choice(elements)
+            language_name = chosen.text.strip()
+
+            if not language_name:
+                self.log('warning', "⚠️ Выбранный язык без текста.")
+                return None
+
+            if click_fact:
+                chosen.click()
+
+            self.log('info', f"✅ Язык выбран: {language_name}")
+            language = (AppiumBy.XPATH,f"//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/localized_language_name' and @text='{language_name}']")
+            return language
+
+        except Exception as e:
+            self.log('error', f"❌ Ошибка при выборе языка: {str(e)}")
+            return None
+
+    def check_watch(self):
+        """
+        Проверяет, что все элементы из name_article видны на экране.
+        Возвращает True, если все элементы видны, False если хотя бы один не виден.
+        """
+        all_visible = True
+
+        for text in self.name_article.values():
+            try:
+                locator = (AppiumBy.XPATH, f'//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/titleText" and @text="{text}"]')
+                if not self.clicks.is_visible(locator):
+                    self.logger.warning(f"Элемент с текстом '{text}' не виден на экране")
+                    all_visible = False
+                else:
+                    self.logger.debug(f"Элемент с текстом '{text}' успешно найден")
+            except Exception as e:
+                self.logger.error(f"Ошибка при проверке элемента '{text}': {str(e)}")
+                all_visible = False
+
+        return all_visible
+
+    def move_first_to_last(self):
+        """
+        Перемещает первый элемент в самый низ списка
+        Возвращает:
+            bool: True если перемещение успешно, False если произошла ошибка
+        """
+        try:
+            self.log("debug", "Получаем текущий список элементов")
+
+            # Получаем все drag-элементы
+            drag_elements = self.driver.find_elements(*self.DRAG_ICONS)
+
+            if len(drag_elements) < 2:
+                self.log("warning", "⚠️ Недостаточно элементов для перемещения (нужно минимум 2)")
+                return False
+
+            # Определяем индексы
+            index_from = 0  # Первый элемент
+            index_to = len(drag_elements) - 1  # Последний элемент
+
+            self.log("debug", f"🔄 Перетаскиваем элемент с позиции {index_from} на {index_to}")
+
+            # Получаем элементы для перемещения
+            source = drag_elements[index_from]
+            target = drag_elements[index_to]
+
+            # Выполняем перемещение
+            self.driver.drag_and_drop(source, target)
+
+            # Ожидаем обновления списка
+            WebDriverWait(self.driver, 5).until(
+                lambda d: len(self.driver.find_elements(*self.DRAG_ICONS)) == len(drag_elements)
+            )
+
+            self.log("info", "✅ Первый элемент успешно перемещен в конец списка")
+            return True
+
+        except Exception as e:
+            self.log("error", f"❌ Неожиданная ошибка при перемещении элемента: {str(e)}")
             return False
