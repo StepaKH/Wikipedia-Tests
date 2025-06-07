@@ -93,6 +93,10 @@ def test_drag_language_to_bottom(open_language_edit_screen, logger, new_language
         lang_page = open_language_edit_screen
         logger.info("=== Тест: перемещение языка вниз списка ===")
 
+        if not new_language:
+            assert lang_page.clicks.safe_click(lang_page.ADD_LANGUAGE_TITLE)
+            lang_page.add_language_via_search('Русский')
+
         with allure.step("Получаем текущий список языков"):
             logger.debug("Получаем список отображаемых языков")
             languages = lang_page.get_language_names()
@@ -186,6 +190,9 @@ def test_delete_random_language_by_long_press(open_language_edit_screen, logger)
         lang_page = open_language_edit_screen
         logger.info("=== Тест: удаление случайного языка через долгое нажатие ===")
 
+        assert lang_page.clicks.safe_click(lang_page.ADD_LANGUAGE_TITLE)
+        lang_page.add_language_via_search('Русский')
+
         with allure.step("Удаляем язык через long press"):
             deleted = lang_page.remove_random_language_by_long_press()
             assert deleted, "❌ Не удалось удалить язык через долгое нажатие"
@@ -208,6 +215,9 @@ def test_delete_random_language_via_menu(open_language_edit_screen, logger):
     try:
         lang_page = open_language_edit_screen
         logger.info("=== Тест: удаление случайного языка через меню ===")
+
+        assert lang_page.clicks.safe_click(lang_page.ADD_LANGUAGE_TITLE)
+        lang_page.add_language_via_search('Русский')
 
         with allure.step("Удаляем язык через меню"):
             deleted = lang_page.remove_random_language_via_menu()

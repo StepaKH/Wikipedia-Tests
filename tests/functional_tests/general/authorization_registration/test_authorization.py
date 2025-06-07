@@ -162,8 +162,8 @@ def test_successful_login(open_log_in_screen, logger, log_out):
 
         with allure.step("1. Заполняем форму валидными данными"):
             page.fill_auth_form(
-                login="leviofan2005",
-                password="08.06.05"
+                login="Stepa2005",
+                password="10.01.05"
             )
             allure.attach(
                 name="Введенные данные",
