@@ -1,16 +1,24 @@
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
+
 from config.settings import Config
 
-def create_driver():
-    """Создает и возвращает драйвер Appium"""
-    options = UiAutomator2Options()
-    options.platform_name = Config.PLATFORM_NAME
-    options.automation_name = Config.AUTOMATION_NAME
-    options.device_name = Config.DEVICE_NAME
-    options.app = Config.APP_PATH
-    options.app_package = Config.APP_PACKAGE
-    options.app_activity = Config.APP_ACTIVITY
 
-    driver = webdriver.Remote(Config.APPIUM_SERVER_URL, options=options)
-    return driver
+def create_driver(worker_id: str = "master"):
+    device_config = Config.get_device_config(worker_id)
+
+    # Формируем URL для Appium с учетом порта устройства
+    appium_url = f"http://localhost:{device_config['appiumPort']}"
+
+    options = UiAutomator2Options().load_capabilities({
+        **device_config,
+        "app": Config.APP_PATH,
+        "appPackage": Config.APP_PACKAGE,
+        "appActivity": Config.APP_ACTIVITY,
+        "newCommandTimeout": 300,
+        "uiautomator2ServerInstallTimeout": 60000,
+        "adbExecTimeout": 60000,
+        "autoGrantPermissions": True
+    })
+
+    return webdriver.Remote(appium_url, options=options)

@@ -1,11 +1,19 @@
-import subprocess
-import signal
-import pytest
-import allure
-import platform
-import os
 import logging
+import os
+import platform
+import signal
+import subprocess
+from typing import Generator
+
+import allure
+import pytest
+import requests
 from appium.webdriver.appium_service import AppiumService
+from appium.webdriver.webdriver import WebDriver as Remote
+from requests.adapters import HTTPAdapter
+from urllib3 import Retry
+
+from config.settings import Config
 from drivers.appium_driver import create_driver
 from pages.functional_tests_page.all_pages import AllPages
 from utils.logger_utils import setup_logger, setup_logger_device, setup_service_logger
@@ -17,15 +25,19 @@ _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 _ALLURE_DIR = os.path.join(_PROJECT_ROOT, "allure")
 
 @pytest.fixture(scope="session", autouse=True)
-def appium_service():
+def appium_service(request):
+    worker_id = getattr(request.config, "workerinput", {}).get("workerid", "master")
+    device_config = Config.get_device_config(worker_id)
+    port = device_config["appiumPort"]
+
     """Запуск Appium сервера"""
     # Создаём логгер отдельный для Appium
     logs_root_dir = os.path.join(_PROJECT_ROOT, "logs", "session")
     os.makedirs(logs_root_dir, exist_ok=True)
-    log_file = os.path.join(logs_root_dir, "appium_service.log")
+    log_file = os.path.join(logs_root_dir, f"appium_service_{port}.log")
 
     # Настраиваем логгер
-    logger = logging.getLogger("appium_service")
+    logger = logging.getLogger(f"appium_service_{worker_id}")
     logger.setLevel(logging.DEBUG)
     if logger.hasHandlers():
         logger.handlers.clear()
@@ -35,10 +47,18 @@ def appium_service():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    logger.info("🚀 Запуск Appium сервера...")
+    logger.info(f"🚀 Запуск Appium сервера на порту {port}...")
 
     service = AppiumService()
-    service.start(args=['--log-level', 'error'], timeout_ms=15000)
+    service.start(
+        args=[
+            '--port', str(port),
+            '--log-level', 'error',
+            '--allow-insecure', 'parallel_sessions',
+            '--relaxed-security'
+        ],
+        timeout_ms=20000
+    )
 
     if not (service.is_running and service.is_listening):
         logger.error("❌ Appium сервер не запустился")
@@ -52,11 +72,98 @@ def appium_service():
     service.stop()
     logger.info("✅ Appium сервер остановлен")
 
+def _get_worker_logger(worker_id: str, name: str, clear: bool = True) -> logging.Logger:
+    """Создает и настраивает логгер для конкретного воркера"""
+    LOGS_DIR = os.path.join(_PROJECT_ROOT, "logs", "driver")
+    os.makedirs(LOGS_DIR, exist_ok=True)
+
+    logger = logging.getLogger(f"{name}_{worker_id}")
+    logger.setLevel(logging.DEBUG)
+
+    # Очистка предыдущих обработчиков
+    for handler in logger.handlers[:]:
+        handler.close()
+        logger.removeHandler(handler)
+
+    # Настройка файлового обработчика
+    # Очистка или дозапись в лог
+    log_file = os.path.join(LOGS_DIR, f"{name}_{worker_id}.log")
+    file_mode = 'w' if clear else 'a'
+
+    handler = logging.FileHandler(log_file, mode=file_mode, encoding='utf-8')
+    handler.setFormatter(logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    ))
+    logger.addHandler(handler)
+
+    return logger
+
+def _wait_for_appium_ready(port: int, timeout: float = 5.0, interval: float = 1.0) -> bool:
+    url = f"http://localhost:{port}/status"
+    session = requests.Session()
+    adapter = HTTPAdapter(
+        max_retries=Retry(
+            total=int(timeout / interval),
+            backoff_factor=interval,
+            status_forcelist=[500, 502, 503, 504]
+        )
+    )
+    session.mount("http://", adapter)
+
+    try:
+        response = session.get(url, timeout=interval)
+        return response.status_code == 200
+    except requests.exceptions.RequestException:
+        return False
+
 @pytest.fixture(scope="function")
-def driver():
-    d = create_driver()
-    yield d
-    d.quit()
+def driver(request) -> Generator[Remote, None, None]:
+    """Фикстура для создания и закрытия драйвера с улучшенным логированием"""
+    worker_id = getattr(request.config, "workerinput", {}).get("workerid", "master")
+    logger = _get_worker_logger(worker_id, "driver")
+    port = Config.get_device_config(worker_id)["appiumPort"]
+
+    # Ожидаем готовности Appium сервера
+    logger.debug("⏳ Ожидание готовности Appium сервера...")
+    if not _wait_for_appium_ready(port):
+        logger.error("❌ Appium сервер не доступен")
+        pytest.fail("Appium сервер не запущен или не отвечает")
+
+    driver_instance = None
+    try:
+        logger.debug("🚀 Инициализация драйвера...")
+        driver_instance = create_driver(worker_id)
+        logger.info("✅ Драйвер успешно создан")
+        yield driver_instance
+    except Exception as e:
+        logger.error(f"❌ Ошибка при создании драйвера: {str(e)}")
+        pytest.fail(f"Не удалось инициализировать драйвер: {str(e)}")
+    finally:
+        if driver_instance:
+            try:
+                logger.debug("🛑 Завершение работы драйвера...")
+                driver_instance.quit()
+                logger.info("✅ Драйвер успешно закрыт")
+            except Exception as e:
+                logger.error(f"⚠️ Ошибка при закрытии драйвера: {str(e)}")
+
+def pytest_sessionstart(session):
+    """Очищает лог-файлы только один раз в начале сессии"""
+    LOGS_DIR = os.path.join(_PROJECT_ROOT, "logs", "driver")
+    os.makedirs(LOGS_DIR, exist_ok=True)
+
+    for filename in os.listdir(LOGS_DIR):
+        file_path = os.path.join(LOGS_DIR, filename)
+        if filename.endswith(".log"):
+            with open(file_path, "w", encoding="utf-8"):
+                pass  # очищает файл
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_setup(item):
+    """Хук для логирования информации о запуске теста"""
+    worker_id = getattr(item.config, "workerinput", {}).get("workerid", "master")
+    logger = _get_worker_logger(worker_id, "test_setup", clear=False)
+    logger.debug(f"🔧 Тест '{item.nodeid}' запускается на воркере {worker_id}")
 
 @pytest.fixture(scope="function")
 def pages(driver, logger):
@@ -109,6 +216,11 @@ def device_logs(request, service_logger):
     test_file_path = request.fspath
     project_root = str(request.config.rootdir)
 
+    # Получаем worker_id и udid
+    worker_id = getattr(request.config, "workerinput", {}).get("workerid", "master")
+    device_config = Config.get_device_config(worker_id)
+    udid = device_config["udid"]
+
     # Путь к логам
     test_module_dir = os.path.basename(os.path.dirname(test_file_path))
     log_dir_path = os.path.join(project_root, "logs", f"{test_module_dir}_logs")
@@ -117,9 +229,9 @@ def device_logs(request, service_logger):
     log_file = setup_logger_device(test_name, log_dir_path)
 
     try:
-        subprocess.run(['adb', 'logcat', '-c'], check=True)
-        subprocess.run(['adb', 'logcat', '-G', '2M'], check=True)
-        service_logger.info("✅ logcat очищен и буфер увеличен")
+        subprocess.run(['adb', '-s', udid, 'logcat', '-c'], check=True)
+        subprocess.run(['adb', '-s', udid, 'logcat', '-G', '2M'], check=True)
+        service_logger.info(f"✅ logcat очищен и буфер увеличен для {udid}")
     except subprocess.CalledProcessError as e:
         service_logger.error(f"❌ Ошибка при очистке logcat или установке буфера: {e}")
         yield
@@ -137,8 +249,8 @@ def device_logs(request, service_logger):
         if platform.system() != "Windows":
             kwargs['preexec_fn'] = os.setsid
 
-        process = subprocess.Popen(['adb', 'logcat', f'{ADB_TAG}:I', '*:S'], **kwargs)
-        service_logger.info(f"🔍 Логирование девайса начато: {log_file}")
+        process = subprocess.Popen(['adb', '-s', udid, 'logcat', f'{ADB_TAG}:I', '*:S'], **kwargs)
+        service_logger.info(f"🔍 Логирование устройства {udid} начато: {log_file}")
     except Exception as e:
         service_logger.error(f"❌ Не удалось запустить adb logcat: {e}")
         yield
