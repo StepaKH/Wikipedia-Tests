@@ -94,3 +94,27 @@ class SwipeActions:
 
     def swipe_down(self, wait_locator=None, expected_text=None, first_screen=None, speed="normal"):
         return self.swipe("down", speed, wait_locator, expected_text, first_screen)
+
+    def swipe_up_for_customize(self, wait_locator=None, expected_text=None, first_screen=None, speed="slow"):
+        """
+        Улучшенный свайп вверх с возможностью медленного скролла
+        """
+        window_size = self.driver.get_window_size()
+        width = window_size['width']
+        height = window_size['height']
+
+        # Параметры для медленного свайпа
+        if speed == "slow":
+            start_y = height * 0.8  # Начинаем ниже
+            end_y = height * 0.2  # Заканчиваем выше
+            duration = 1000  # Более медленный свайп
+        else:
+            start_y = height * 0.7
+            end_y = height * 0.3
+            duration = 500
+
+        self.driver.swipe(width * 0.5, start_y, width * 0.5, end_y, duration)
+
+        if wait_locator:
+            return self._check_swipe_result(wait_locator, expected_text)
+        return True

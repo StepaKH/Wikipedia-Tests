@@ -1,3 +1,4 @@
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -13,7 +14,10 @@ class ClickActions:
         self.wait_for_element(by_locator).click()
 
     def is_visible(self, by_locator):
-        return self.wait_for_element(by_locator).is_displayed()
+        try:
+            return self.wait_for_element(by_locator).is_displayed()
+        except TimeoutException:
+            return False
 
     def safe_click(self, by_locator):
         """Ожидание видимости элемента и клик по нему"""
