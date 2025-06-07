@@ -340,22 +340,33 @@ def log_in(logger, skip_onboarding):
     saved = skip_onboarding.saved
 
     try:
-        with allure.step(f"Авторизация пользователя"):
+        with allure.step("1. Авторизация пользователя"):
             with allure.step("Переход в раздел 'Saved'"):
                 saved.clicks.safe_click(saved.SAVED_BTN)
 
-            with allure.step("Открытие экрана авторизации"):
+            with allure.step("2. Открытие экрана авторизации"):
                 saved.clicks.safe_click(saved.POSITIVE_BTN)
                 saved.clicks.safe_click(saved.CREATE_ACCOUNT_LOGIN_BUTTON_BTN)
 
-            with allure.step("Ввод учетных данных"):
+            with allure.step("3. Ввод учетных данных"):
                 assert saved.log_in_to_account(), "Не удалось ввести логин/пароль"
                 saved.clicks.safe_click(saved.LOGIN_BUTTON_BTN)
 
-            with allure.step("Нажатие кнопки 'Dont allow'"):
-                logger.debug("Ищем кнопку 'Dont allow'")
-                assert saved.clicks.safe_click(saved.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
-                logger.info("Кнопка 'Dont allow' найдена и нажата")
+            with allure.step("4. Проверяем успешный вход"):
+                main_screen = saved.clicks.is_visible(saved.MAIN_SCREEN)
+
+                if not main_screen:
+                    success_login = saved.clicks.is_visible(saved.SUCCESS_LOGIN_INDICATOR)
+
+                    if not success_login:
+                        logger.error("Не отобразился ни индикатор успешного входа, ни главный экран")
+                        raise AssertionError("Не отобразился ни индикатор успешного входа, ни главный экран")
+
+                    with allure.step("5. Нажатие кнопки 'Dont allow'"):
+                        assert saved.clicks.safe_click(saved.PERMISSION_DENY_BUTTON_BTN), "Кнопка 'Dont allow' не найдена"
+                        logger.info("Кнопка 'Dont allow' найдена и нажата")
+
+                logger.info("✅ Успешная авторизация (определен целевой экран)")
 
             logger.info("Успешная авторизация")
             yield saved

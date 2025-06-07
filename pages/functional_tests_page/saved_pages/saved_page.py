@@ -42,6 +42,8 @@ class SavedPage(BasePage):
     PERMISSION_DENY_BUTTON_BTN = (AppiumBy.XPATH,"//android.widget.Button[@resource-id='com.android.permissioncontroller:id/permission_deny_button']")
     USERNAME_ET = (AppiumBy.XPATH, "//android.widget.EditText[@text='Username']")
     PASSWORD_ET = (AppiumBy.XPATH, "//android.widget.EditText[@text='Password']")
+    MAIN_SCREEN = ( AppiumBy.XPATH, '//android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.LinearLayout')
+    SUCCESS_LOGIN_INDICATOR = (AppiumBy.ID, "com.android.permissioncontroller:id/grant_dialog")
 
     #for log_out
     MORE_BTN = (AppiumBy.XPATH, "//android.widget.FrameLayout[@content-desc='More']")
@@ -117,7 +119,7 @@ class SavedPage(BasePage):
             return False
 
     def log_in_to_account(self):
-        username = "arr2005"
+        username = "arrr2005"
         password = "08.06.05"
 
         try:

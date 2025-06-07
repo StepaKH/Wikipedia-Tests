@@ -2,6 +2,7 @@ import random
 import string
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 from pages.functional_tests_page.base.base_page import BasePage
 
 class ExplorePage(BasePage):
@@ -108,11 +109,40 @@ class ExplorePage(BasePage):
     SHARE_TV = (AppiumBy.XPATH, '//android.widget.TextView[@content-desc="Share"]')
     PAGE_SAVE = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/page_save"]')
 
+    # for customize toolbar
+    OPEN_CUSTOMIZE_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/view_announcement_action_positive"]')
+    VIEW_CARD_HEADER_TITLE_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/view_card_header_title"]')
+    TODAY_ON_WIKIPEDIA_TV = ( AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/view_card_header_title" and @text="Today on Wikipedia"]')
+    #MORE_OPTIONS_IV = (AppiumBy.XPATH, "//android.widget.ImageView[@content-desc='More options']")
+    SHOW_ALL_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/title" and @text="Show all"]')
+    CHECKBOX1_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[1]')
+    CHECKBOX2_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[2]')
+    CHECKBOX3_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[3]')
+    CHECKBOX4_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[4]')
+    CHECKBOX5_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[5]')
+    CHECKBOX7_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[6]')
+    CHECKBOX8_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[7]')
+    CHECKBOX9_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[8]')
+    CHECKBOX10_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[9]')
+
+    #for got_it
+    CUSTOMIZE_GOT_IT_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/view_announcement_action_negative"]')
+    SNACKBAR_TEXT_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/snackbar_text"]')
+
+    #for hide all
+    HIDE_ALL_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/title" and @text="Hide all"]')
+    CUSTOMIZE_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/customize_button"]')
+
+    #for switch and restore
+    FEED_SWITCH = (AppiumBy.XPATH, '//android.widget.ImageView[@resource-id="org.wikipedia.alpha:id/feed_content_type_drag_handle"]')
+    RESTORE_DEFAULT_VIEW_TV = (AppiumBy.XPATH,'//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/title" and @text="Restore default view"]')
+    CUSTOMIZE_THE_FEED_TV = (AppiumBy.XPATH, '//android.widget.TextView[@resource-id="org.wikipedia.alpha:id/title" and @text="Customize the feed"]')
+
     def log(self, level, msg):
         if self.logger:
             getattr(self.logger, level)(msg)
 
-
+    feed = {'Wikipedia games', 'Featured article', 'Top read', 'Places nearby', 'Picture of the day', 'In the news', 'On this day', 'Random article', 'Today on wikipedia'}
     test_text = {}
     name_article = {}
     i_primary = 1
@@ -475,4 +505,558 @@ class ExplorePage(BasePage):
 
         except Exception as e:
             self.log("error", f"❌ Неожиданная ошибка при перемещении элемента: {str(e)}")
+            return False
+
+    def verify_feed_order_wikipedia_games(self):
+        """
+        Проверяет, что карточки в ленте расположены в заданном порядке
+        с учетом особого локатора для 'Today on Wikipedia'
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        expected_order = [
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+            'Today on Wikipedia'
+        ]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", "Начинаем проверку порядка карточек в ленте")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia"
+                try:
+                    today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                    today_text = today_element.text
+                    if today_text not in current_titles:
+                        current_titles.append(today_text)
+                except NoSuchElementException:
+                    pass
+
+                # Добавляем новые уникальные заголовки
+                for title in current_titles:
+                    if title in expected_order and title not in found_titles:
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
+            return False
+
+    def verify_feed_order_featured_article(self):
+        """
+        Проверяет, что карточки в ленте расположены в заданном порядке
+        с учетом особого локатора для 'Today on Wikipedia'
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        expected_order = [
+            'Wikipedia games',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+            'Today on Wikipedia'
+        ]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", "Начинаем проверку порядка карточек в ленте")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia"
+                try:
+                    today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                    today_text = today_element.text
+                    if today_text not in current_titles:
+                        current_titles.append(today_text)
+                except NoSuchElementException:
+                    pass
+
+                # Добавляем новые уникальные заголовки
+                for title in current_titles:
+                    if title in expected_order and title not in found_titles:
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
+            return False
+
+    def verify_feed_order(self):
+        """
+        Проверяет, что карточки в ленте расположены в заданном порядке
+        с учетом особого локатора для 'Today on Wikipedia'
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        expected_order = [
+            'Wikipedia games',
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+            'Today on Wikipedia'
+        ]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", "Начинаем проверку порядка карточек в ленте")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia"
+                try:
+                    today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                    today_text = today_element.text
+                    if today_text not in current_titles:
+                        current_titles.append(today_text)
+                except NoSuchElementException:
+                    pass
+
+                # Добавляем новые уникальные заголовки
+                for title in current_titles:
+                    if title in expected_order and title not in found_titles:
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
+            return False
+
+    def verify_feed_order_change(self):
+        """
+        Проверяет, что карточки в ленте расположены в заданном порядке
+        с учетом особого локатора для 'Today on Wikipedia'
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        expected_order = [
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+            'Wikipedia games',
+            'Today on Wikipedia'
+        ]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", "Начинаем проверку порядка карточек в ленте")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia"
+                try:
+                    today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                    today_text = today_element.text
+                    if today_text not in current_titles:
+                        current_titles.append(today_text)
+                except NoSuchElementException:
+                    pass
+
+                # Добавляем новые уникальные заголовки
+                for title in current_titles:
+                    if title in expected_order and title not in found_titles:
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
+            return False
+
+    def verify_feed_order_today_on_wikipedia(self):
+        """
+        Проверяет, что карточки в ленте расположены в заданном порядке
+        с учетом особого локатора для 'Today on Wikipedia'
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        expected_order = [
+            'Wikipedia games',
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article'
+        ]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", "Начинаем проверку порядка карточек в ленте")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia"
+                try:
+                    today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                    today_text = today_element.text
+                    if today_text not in current_titles:
+                        current_titles.append(today_text)
+                except NoSuchElementException:
+                    pass
+
+                # Добавляем новые уникальные заголовки
+                for title in current_titles:
+                    if title in expected_order and title not in found_titles:
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
+            return False
+
+    def move_first_to_last_feed(self):
+        """
+        Перемещает первый элемент в самый низ списка
+        Возвращает:
+            bool: True если перемещение успешно, False если произошла ошибка
+        """
+        try:
+            self.log("debug", "Получаем текущий список элементов")
+
+            # Получаем все drag-элементы
+            drag_elements = self.driver.find_elements(*self.FEED_SWITCH)
+
+            if len(drag_elements) < 2:
+                self.log("warning", "⚠️ Недостаточно элементов для перемещения (нужно минимум 2)")
+                return False
+
+            # Определяем индексы
+            index_from = 0  # Первый элемент
+            index_to = len(drag_elements) - 1  # Последний элемент
+
+            self.log("debug", f"🔄 Перетаскиваем элемент с позиции {index_from} на {index_to}")
+
+            # Получаем элементы для перемещения
+            source = drag_elements[index_from]
+            target = drag_elements[index_to]
+
+            # Выполняем перемещение
+            self.driver.drag_and_drop(source, target)
+
+            # Ожидаем обновления списка
+            WebDriverWait(self.driver, 5).until(
+                lambda d: len(self.driver.find_elements(*self.FEED_SWITCH)) == len(drag_elements)
+            )
+
+            self.log("info", "✅ Первый элемент успешно перемещен в конец списка")
+            return True
+
+        except Exception as e:
+            self.log("error", f"❌ Неожиданная ошибка при перемещении элемента: {str(e)}")
+            return False
+
+    def random_hide_feed_items(self):
+        """
+        Случайным образом скрывает элементы ленты используя соответствующие свитчи
+        Возвращает:
+            list: Список скрытых элементов (delete_order)
+        """
+        expected_order = [
+            'Wikipedia games',
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+        ]
+
+        # Соответствие элементов и их свитчей
+        switch_mapping = {
+            'Wikipedia games': self.CHECKBOX1_SWITCH,
+            'Featured article': self.CHECKBOX2_SWITCH,
+            'Top read': self.CHECKBOX3_SWITCH,
+            'Places nearby': self.CHECKBOX4_SWITCH,
+            'Picture of the day': self.CHECKBOX5_SWITCH,
+            'In the news': self.CHECKBOX7_SWITCH,
+            'On this day': self.CHECKBOX8_SWITCH,
+            'Random article': self.CHECKBOX9_SWITCH,
+        }
+
+        num_to_hide = random.randint(1, len(expected_order))
+        delete_order = random.sample(expected_order, num_to_hide)
+
+        try:
+            self.log("debug", f"Скрываем элементы: {delete_order}")
+
+            # Скрываем выбранные элементы
+            for item in delete_order:
+                switch_locator = switch_mapping[item]
+                try:
+                    # Находим свитч и кликаем по нему
+                    switch = self.driver.find_element(*switch_locator)
+                    switch.click()
+                    self.log("debug", f"Скрыт элемент: {item}")
+
+                except Exception as e:
+                    self.log("warning", f"Не удалось скрыть {item}: {str(e)}")
+                    continue
+
+            self.log("info", f"✅ Скрыты элементы: {delete_order}")
+            return delete_order
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при скрытии элементов: {str(e)}")
+            return []
+
+    def verify_feed_order_with_hidden(self, hidden_items=None):
+        """
+        Проверяет порядок карточек в ленте, исключая скрытые элементы
+
+        Параметры:
+            hidden_items (list): Список скрытых карточек, которые нужно исключить из проверки
+
+        Возвращает:
+            bool: True если порядок совпадает, False если нет
+        """
+        full_expected_order = [
+            'Wikipedia games',
+            'Featured article',
+            'Top read',
+            'Places nearby',
+            'Picture of the day',
+            'In the news',
+            'On this day',
+            'Random article',
+            'Today on Wikipedia'
+        ]
+
+        # Исключаем скрытые элементы из ожидаемого порядка
+        expected_order = [item for item in full_expected_order
+                          if hidden_items is None or item not in hidden_items]
+
+        found_titles = []
+        max_swipes = 15
+        current_swipes = 0
+
+        try:
+            self.log("debug", f"Начинаем проверку порядка карточек. Скрытые элементы: {hidden_items}")
+            self.log("debug", f"Ожидаемый порядок после исключения: {expected_order}")
+
+            while current_swipes < max_swipes and len(found_titles) < len(expected_order):
+                # Проверяем обычные карточки
+                elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
+                current_titles = [el.text for el in elements if el.text]
+
+                # Проверяем особую карточку "Today on Wikipedia" (если не скрыта)
+                if 'Today on Wikipedia' not in (hidden_items or []):
+                    try:
+                        today_element = self.driver.find_element(*self.TODAY_ON_WIKIPEDIA_TV)
+                        today_text = today_element.text
+                        if today_text not in current_titles:
+                            current_titles.append(today_text)
+                    except NoSuchElementException:
+                        pass
+
+                # Добавляем новые уникальные заголовки (исключая скрытые)
+                for title in current_titles:
+                    if (title in expected_order and
+                            title not in found_titles and
+                            title not in (hidden_items or [])):
+                        found_titles.append(title)
+                        self.log("debug", f"Найдена карточка: {title}")
+
+                # Проверяем частичное соответствие порядка
+                for i in range(len(found_titles)):
+                    if found_titles[i] != expected_order[i]:
+                        self.log("warning",
+                                 f"Несоответствие порядка на позиции {i}: ожидалось {expected_order[i]}, найдено {found_titles[i]}")
+                        return False
+
+                # Если нашли все карточки - выходим
+                if len(found_titles) == len(expected_order):
+                    break
+
+                # Свайпаем вверх
+                self.swipes.swipe_up_for_customize()
+                current_swipes += 1
+
+            # Финальная проверка
+            if found_titles == expected_order:
+                self.log("info", "✅ Порядок карточек в ленте соответствует ожидаемому")
+                return True
+            else:
+                missing = set(expected_order) - set(found_titles)
+                self.log("warning",
+                         f"⚠️ Порядок карточек не совпадает. Ожидалось: {expected_order}, найдено: {found_titles}. Отсутствуют: {missing}")
+                return False
+
+        except Exception as e:
+            self.log("error", f"❌ Ошибка при проверке порядка карточек: {str(e)}")
             return False

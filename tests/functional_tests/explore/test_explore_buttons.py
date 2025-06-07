@@ -1215,3 +1215,4 @@ def test_search_on_explore(pages, logger, skip_onboarding):
     except Exception as e:
         logger.error(f"!!! Тест упал с ошибкой: {str(e)}")
         raise
+
