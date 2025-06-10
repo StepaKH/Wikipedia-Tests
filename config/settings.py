@@ -1,9 +1,16 @@
 import os
 import re
+import socket
 import subprocess
 import warnings
 from typing import Dict, List
 
+def get_free_port():
+    s = socket.socket()
+    s.bind(('', 0))
+    port = s.getsockname()[1]
+    s.close()
+    return port
 
 class Config:
     """Конфигурация проекта"""
@@ -49,7 +56,7 @@ class Config:
                         "automationName": "uiautomator2",
                         "deviceName": f"device_{i}",
                         "udid": match.group(1),
-                        "systemPort": Config.BASE_SYSTEM_PORT + i,
+                        "systemPort": get_free_port(),
                         "mjpegServerPort": Config.BASE_MJPEG_PORT + i,
                         "appiumPort": Config.BASE_APPIUM_PORT + i,
                         "appPackage": "org.wikipedia.alpha",
