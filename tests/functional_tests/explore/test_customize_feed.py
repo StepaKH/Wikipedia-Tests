@@ -208,6 +208,12 @@ def test_restore_customize(pages, logger, skip_onboarding):
         with allure.step("2. Проверка, что открылся экран кастомизации"):
             assert explore.clicks.is_visible(explore.CHECKBOX1_SWITCH), "Экран кастомизации ленты не открылся"
             logger.info("Экран кастомизации ленты открылся")
+            logger.debug("Ищем кнопку 'more options'")
+            assert explore.clicks.safe_click(explore.MORE_OPTIONS_IV), "Не удалось нажать 'more options'"
+            logger.info("Удалось нажать 'more options'")
+            logger.debug("Ищем кнопку 'restore'")
+            assert explore.clicks.safe_click(explore.RESTORE_DEFAULT_VIEW_TV), "Не удалось нажать 'restore'"
+            logger.info("Удалось нажать 'restore'")
 
         with allure.step("3. Делаем первую карточку последней"):
             assert explore.move_first_to_last_feed(), "Не удалось переместить первую карточку в конец списка"
