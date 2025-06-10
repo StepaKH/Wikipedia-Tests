@@ -11,7 +11,7 @@ from bot.utils.report_sender import send_last_report
 from bot.utils.scheduler import schedule_tests, is_schedule_active, cancel_scheduled_tests
 from bot.utils.test_runner import run_tests, stop_tests, is_tests_running
 
-ALLOWED_MARKERS = ["smoke", "negative", "onboarding", "positive", "auth", "registration", "validation"]
+ALLOWED_MARKERS = ["smoke", "negative", "onboarding", "positive", "auth", "registration", "validation", "customize_feed", "customize_random", "article", "tabs", "search", "saved"]
 router = Router()
 
 @router.message(Command("start"))
