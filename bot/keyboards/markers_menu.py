@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-ALLOWED_MARKERS = ["smoke", "negative", "onboarding", "positive", "auth", "registration", "validation"]
+ALLOWED_MARKERS = ["smoke", "negative", "onboarding", "positive", "auth", "registration", "validation", "customize_feed", "customize_random", "article", "tabs", "search", "saved"]
 
 def get_marker_menu() -> InlineKeyboardMarkup:
     buttons = [
