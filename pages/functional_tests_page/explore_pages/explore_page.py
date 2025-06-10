@@ -1,5 +1,6 @@
 import random
 import string
+
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
@@ -758,6 +759,7 @@ class ExplorePage(BasePage):
 
             while current_swipes < max_swipes and len(found_titles) < len(expected_order):
                 # Проверяем обычные карточки
+                self.clicks.is_visible(self.VIEW_CARD_HEADER_TITLE_TV)
                 elements = self.driver.find_elements(*self.VIEW_CARD_HEADER_TITLE_TV)
                 current_titles = [el.text for el in elements if el.text]
 
