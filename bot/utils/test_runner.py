@@ -76,6 +76,9 @@ async def run_tests(parallel_count: int = 1, marker: str = None) -> tuple[str, b
         return "⚠️ Тесты уже выполняются, дождитесь завершения.", False, "", {}
 
     _is_running = True
+
+    await asyncio.sleep(5)
+
     try:
         _current_process = await asyncio.create_subprocess_exec(
             *cmd,
