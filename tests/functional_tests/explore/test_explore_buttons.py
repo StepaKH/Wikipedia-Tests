@@ -942,10 +942,10 @@ def test_filter_of_search_on_search_false(pages, logger, skip_onboarding):
             assert explore.clicks.is_visible(explore.SEARCH_SRC_TEXT_ACTV), "Поле 'search_src_text' не найдено"
             logger.info("Поле 'search_src_text' найдено")
 
-        with allure.step("5. Ввод текста в поле фильтрации"):
+        with allure.step("7. Ввод текста в поле фильтрации"):
             assert explore.test_filter_works_false(), "Поле не найдено"
 
-        with allure.step("4. Проверка, что фильтр отработала корректно"):
+        with allure.step("8. Проверка, что фильтр отработала корректно"):
             assert explore.clicks.is_visible(explore.SEARCH_EMPTY_TEXT_TV), "Фильтр сработал неверно"
             actual = []
             expected = []
@@ -953,7 +953,7 @@ def test_filter_of_search_on_search_false(pages, logger, skip_onboarding):
             logger.debug(f"Expected: {expected}")
             logger.info("Фильтр сработал верно")
 
-        with allure.step("5. Выход с экрана фильтрации с помощью кнопки 'Done'"):
+        with allure.step("9. Выход с экрана фильтрации с помощью кнопки 'Done'"):
             logger.debug("Ищем кнопку 'Done'")
             assert explore.clicks.safe_click(explore.DONE_IV), "Кнопка 'Done' не найдена"
             logger.info("Кнопка 'Done' найдена и нажата")
@@ -1019,10 +1019,10 @@ def test_filter_of_search_on_search_true(pages, logger, skip_onboarding):
             assert explore.clicks.is_visible(explore.SEARCH_SRC_TEXT_ACTV), "Поле 'search_src_text' не найдено"
             logger.info("Поле 'search_src_text' найдено")
 
-        with allure.step("5. Ввод текста в поле фильтрации"):
+        with allure.step("7. Ввод текста в поле фильтрации"):
             assert explore.test_filter_works_true(), "Поле не найдено"
 
-        with allure.step("4. Проверка, что фильтр отработала корректно"):
+        with allure.step("8. Проверка, что фильтр отработала корректно"):
             actual = explore.get_search_res()
             expected = [explore.name_article[explore.j_primary-1]]
             logger.debug(f"Actual: {actual}")
@@ -1030,7 +1030,7 @@ def test_filter_of_search_on_search_true(pages, logger, skip_onboarding):
             assert actual == expected, "Фильтр сработал неверно"
             logger.info("Фильтр сработал верно")
 
-        with allure.step("5. Выход с экрана фильтрации с помощью кнопки 'Done'"):
+        with allure.step("9. Выход с экрана фильтрации с помощью кнопки 'Done'"):
             logger.debug("Ищем кнопку 'Done'")
             assert explore.clicks.safe_click(explore.DONE_IV), "Кнопка 'Done' не найдена"
             logger.info("Кнопка 'Done' найдена и нажата")
