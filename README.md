@@ -68,7 +68,7 @@
 
 1. Запустите сервис бота:
    ```bash
-   "python -m bot.main"
+   python -m bot.main
    ```
    
 2. Команды для бота в Telegram:
