@@ -22,9 +22,9 @@
   - Данные сессий
 - ⚙️ **Автоматическое управление** сервером Appium
 
-## Установка
+# Установка
 
-### Требования
+## Требования
 
 - Python 3.10 (должен быть установлен как основная версия)
 - Android SDK с настроенными переменными окружения
@@ -32,16 +32,23 @@
 - Node.js (для Appium)
 - Подключенные Android-устройства/эмуляторы
 
-### Настройка проекта
+## Настройка проекта
 
 1. Клонируйте репозиторий:
-   "git clone https://github.com/yourusername/wikipedia-android-tests.git"
-   "cd wikipedia-android-tests"
+   ```bash
+   git clone https://github.com/yourusername/wikipedia-android-tests.git
+   cd wikipedia-android-tests
+   ```
+
 2. Установите необходимые пакеты:
-   "pip install allure pytest allure-pytest"
-   "pip install -r requirements.txt"
-3. Установите Appium глобально:
-   "npm install -g appium"
+   ```bash
+   pip install allure pytest allure-pytest
+   pip install -r requirements.txt
+   ```
+4. Установите Appium глобально:
+   ```bash
+   npm install -g appium
+   ```
 
 ## Использование
 
