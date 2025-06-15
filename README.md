@@ -45,7 +45,7 @@
    pip install allure pytest allure-pytest
    pip install -r requirements.txt
    ```
-4. Установите Appium глобально:
+3. Установите Appium глобально:
    ```bash
    npm install -g appium
    ```
@@ -55,15 +55,24 @@
 ### Запуск из терминала
 
 1. Запуск тестов на нескольких устройствах:
-   "pytest -n [количество_устройств]"
+   ```bash
+   pytest -n [количество_устройств]
+   ```
+   
 2. Просмотр Allure-отчета:
-   "allure serve allure/"
+   ```bash
+   allure serve allure/
+   ```
 
 ### Управление через Telegram-бота
 
 1. Запустите сервис бота:
+   ```bash
    "python -m bot.main"
+   ```
+   
 2. Команды для бота в Telegram:
+   ```bash
    /run_tests - Запуск тестов вручную
    /stop_tests - Прерывание выполнения тестов
    /last_report - Получение полседнего Allure-отчета
@@ -72,14 +81,18 @@
    /cancel_schedule - Удаление расписания
    /simulate_push - Имитация push-события из GitHub
    /help - Справка
+   ```
+   
 3. После выполнения тестов бот отправит:
+   ```bash
    Результаты выполнения
    Ссылку на Allure-отчет
+   ```
 
 4. Просмотр Allure-отчета:
    -Скачайте архив/папку отчета, полученного от бота
    -Перейдите в терминале в папку с отчетом
-   -Выполните: "allure open ."
+   -Выполните: ```allure open .```
 
 ## Структура проекта
 ```bash
