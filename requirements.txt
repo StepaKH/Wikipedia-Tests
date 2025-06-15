@@ -1,0 +1,21 @@
+# Тестирование
+pytest-xdist
+allure-pytest
+allure-commandline
+
+# Автоматизация мобильного тестирования
+Appium-Python-Client
+uiautomator2
+selenium
+
+# Инфраструктура и утилиты
+psutil
+python-dotenv
+
+# Telegram-бот и API
+aiogram
+apscheduler
+fastapi
+uvicorn
+httpx
+requests
