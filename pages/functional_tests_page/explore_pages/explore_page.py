@@ -121,10 +121,10 @@ class ExplorePage(BasePage):
     CHECKBOX3_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[3]')
     CHECKBOX4_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[4]')
     CHECKBOX5_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[5]')
-    CHECKBOX7_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[6]')
-    CHECKBOX8_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[7]')
-    CHECKBOX9_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[8]')
-    CHECKBOX10_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[9]')
+    CHECKBOX7_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[7]')
+    CHECKBOX8_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[8]')
+    CHECKBOX9_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[9]')
+    CHECKBOX10_SWITCH = (AppiumBy.XPATH, '(//android.widget.Switch[@resource-id="org.wikipedia.alpha:id/feed_content_type_checkbox"])[10]')
 
     #for got_it
     CUSTOMIZE_GOT_IT_BTN = (AppiumBy.XPATH, '//android.widget.Button[@resource-id="org.wikipedia.alpha:id/view_announcement_action_negative"]')
